@@ -1,0 +1,36 @@
+{
+    "msg": "CURRENT-STATE",
+    "time": "2018-06-06T12:41:52.000Z",
+    "mode-reason": "RAPP",
+    "state-reason": "MODE",
+    "dial": "OFF",
+    "rssi": "-46",
+    "channel": "1",
+    "product-state": {
+        "fpwr": "ON",
+        "fdir": "ON",
+        "auto": "ON",
+        "oscs": "ON",
+        "oson": "OION",
+        "nmod": "OFF",
+        "rhtm": "ON",
+        "fnst": "FAN",
+        "ercd": "NONE",
+        "wacd": "NONE",
+        "nmdv": "0004",
+        "fnsp": "AUTO",
+        "bril": "0002",
+        "corf": "ON",
+        "cflr": "0100",
+        "hflr": "0100",
+        "sltm": "OFF",
+        "osal": "0063",
+        "osau": "0243",
+        "ancp": "CUST"
+    },
+    "scheduler": {
+        "srsc": "000000005b1792f0",
+        "dstv": "0001",
+        "tzid": "0001"
+    }
+}

@@ -7,6 +7,7 @@ DYSON_PURE_COOL_LINK_TOUR = "475"
 DYSON_PURE_COOL_LINK_DESK = "469"
 DYSON_PURE_HOT_COOL_LINK_TOUR = "455"
 DYSON_360_EYE = "N223"
+DYSON_PURE_COOL = "438"
 
 
 class FanMode(Enum):
@@ -159,3 +160,31 @@ class Dyson360EyeCommand(Enum):
     PAUSE = "PAUSE"
     RESUME = "RESUME"
     ABORT = "ABORT"
+
+
+class FanPower(Enum):
+    """Fan power."""
+
+    POWER_OFF = 'OFF'
+    POWER_ON = 'ON'
+
+
+class FrontalDirection(Enum):
+    """Frontal Direction."""
+
+    FRONTAL_OFF = 'OFF'
+    FRONTAL_ON = 'ON'
+
+
+class AutoMode(Enum):
+    """Auto Mode."""
+
+    AUTO_OFF = 'OFF'
+    AUTO_ON = 'ON'
+
+
+class ContinuousMonitoring(Enum):
+    """Auto Mode."""
+
+    MONITORING_OFF = 'OFF'
+    MONITORING_ON = 'ON'

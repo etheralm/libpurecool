@@ -83,7 +83,12 @@ class DysonDevice:
 
         :param json_body: JSON message returned by the HTTPS API
         """
-        self._active = json_body['Active']
+
+        """the v2 api does not have an active field"""
+        if 'Active' in json_body:
+            self._active = json_body['Active']
+        else:
+            self._active = None
         self._serial = json_body['Serial']
         self._name = json_body['Name']
         self._version = json_body['Version']

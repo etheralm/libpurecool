@@ -5,7 +5,9 @@
 import logging
 import requests
 from requests.auth import HTTPBasicAuth
-from .utils import is_360_eye_device, is_heating_device
+
+from libpurecoollink.dyson_pure_cool import DysonPureCool
+from .utils import is_360_eye_device, is_heating_device, is_dyson_pure_cool_device
 
 from .dyson_360_eye import Dyson360Eye
 from .dyson_pure_cool_link import DysonPureCoolLink
@@ -58,6 +60,9 @@ class DysonAccount:
             device_response = requests.get(
                 "https://{0}/v1/provisioningservice/manifest".format(
                     DYSON_API_URL), verify=False, auth=self._auth)
+            device_v2_response = requests.get(
+                "https://{0}/v2/provisioningservice/manifest".format(
+                    DYSON_API_URL), verify=False, auth=self._auth)
             devices = []
             for device in device_response.json():
                 if is_360_eye_device(device):
@@ -67,6 +72,10 @@ class DysonAccount:
                 else:
                     dyson_device = DysonPureCoolLink(device)
                 devices.append(dyson_device)
+
+            for device_v2 in device_v2_response.json():
+                if is_dyson_pure_cool_device(device_v2):
+                    devices.append(DysonPureCool(device_v2))
 
             return devices
         else:
