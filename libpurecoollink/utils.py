@@ -2,7 +2,8 @@
 import json
 import base64
 from Crypto.Cipher import AES
-from .const import DYSON_PURE_HOT_COOL_LINK_TOUR, DYSON_360_EYE, DYSON_PURE_COOL
+from .const import DYSON_PURE_HOT_COOL_LINK_TOUR, \
+    DYSON_360_EYE, DYSON_PURE_COOL
 
 
 def support_heating(product_type):
@@ -74,3 +75,8 @@ def is_dyson_pure_cool_device(json_payload):
         return True
     return False
 
+
+def get_field_value(state, field):
+    """Get field value."""
+    return state[field][1] if isinstance(state[field], list) else state[
+        field]

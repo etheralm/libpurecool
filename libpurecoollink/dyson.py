@@ -3,11 +3,15 @@
 # pylint: disable=too-many-public-methods,too-many-instance-attributes
 
 import logging
+
 import requests
 from requests.auth import HTTPBasicAuth
 
+import urllib3
+
 from libpurecoollink.dyson_pure_cool import DysonPureCool
-from .utils import is_360_eye_device, is_heating_device, is_dyson_pure_cool_device
+from .utils import is_360_eye_device, \
+    is_heating_device, is_dyson_pure_cool_device
 
 from .dyson_360_eye import Dyson360Eye
 from .dyson_pure_cool_link import DysonPureCoolLink
@@ -37,7 +41,10 @@ class DysonAccount:
 
     def login(self):
         """Login to dyson web services."""
-        requests.packages.urllib3.disable_warnings()
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        _LOGGER.debug("Disabling insecure request warnings since "
+                      "dyson are using a self signed certificate.")
+
         request_body = {
             "Email": self._email,
             "Password": self._password

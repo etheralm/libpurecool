@@ -5,22 +5,11 @@
 import json
 
 from libpurecoollink.const import SENSOR_INIT_STATES
-from .utils import printable_fields
+from .utils import printable_fields, get_field_value
 
 
 class DysonPureCoolV2State:
     """Dyson device state."""
-
-    @staticmethod
-    def is_state_message(payload):
-        """Return true if this message is a Dyson Pure state message."""
-        return json.loads(payload)['msg'] in ["CURRENT-STATE", "STATE-CHANGE"]
-
-    @staticmethod
-    def _get_field_value(state, field):
-        """Get field value."""
-        return state[field][1] if isinstance(state[field], list) else state[
-            field]
 
     def __init__(self, payload):
         """Create a new state.
@@ -29,21 +18,24 @@ class DysonPureCoolV2State:
         """
         json_message = json.loads(payload)
         self._state = json_message['product-state']
-        self._fan_power = self._get_field_value(self._state, 'fpwr')
-        self._front_direction = self._get_field_value(self._state, 'fdir')
-        self._auto_mode = self._get_field_value(self._state, 'auto')
-        self._oscillation_status = self._get_field_value(self._state, 'oscs')
-        self._oscillation = self._get_field_value(self._state, 'oson')
-        self._night_mode = self._get_field_value(self._state, 'nmod')
-        self._continuous_monitoring = self._get_field_value(self._state, 'rhtm')
-        self._fan_state = self._get_field_value(self._state, 'fnst')
-        self._night_mode_speed = self._get_field_value(self._state, 'nmdv')
-        self._speed = self._get_field_value(self._state, 'fnsp')
-        self._carbon_filter_state = self._get_field_value(self._state, 'cflr')
-        self._hepa_filter_state = self._get_field_value(self._state, 'hflr')
-        self._sleep_timer = self._get_field_value(self._state, 'sltm')
-        self._oscillation_angle_low = self._get_field_value(self._state, 'osal')
-        self._oscillation_angle_high = self._get_field_value(self._state, 'osau')
+        self._fan_power = get_field_value(self._state, 'fpwr')
+        self._front_direction = get_field_value(self._state, 'fdir')
+        self._auto_mode = get_field_value(self._state, 'auto')
+        self._oscillation_status = get_field_value(self._state, 'oscs')
+        self._oscillation = get_field_value(self._state, 'oson')
+        self._night_mode = get_field_value(self._state, 'nmod')
+        self._continuous_monitoring = \
+            get_field_value(self._state, 'rhtm')
+        self._fan_state = get_field_value(self._state, 'fnst')
+        self._night_mode_speed = get_field_value(self._state, 'nmdv')
+        self._speed = get_field_value(self._state, 'fnsp')
+        self._carbon_filter_state = get_field_value(self._state, 'cflr')
+        self._hepa_filter_state = get_field_value(self._state, 'hflr')
+        self._sleep_timer = get_field_value(self._state, 'sltm')
+        self._oscillation_angle_low = \
+            get_field_value(self._state, 'osal')
+        self._oscillation_angle_high = \
+            get_field_value(self._state, 'osau')
 
     @property
     def fan_power(self):
@@ -62,7 +54,7 @@ class DysonPureCoolV2State:
 
     @property
     def oscillation_status(self):
-        """Oscillation. Can be IDLE if auto mode is on"""
+        """Oscillation. Can be IDLE if auto mode is on."""
         return self._oscillation_status
 
     @property
@@ -137,23 +129,12 @@ class DysonPureCoolV2State:
                   ("sleep_timer", self.sleep_timer),
                   ("oscillation_angle_low", self.oscillation_angle_low),
                   ("oscillation_angle_high", self.oscillation_angle_high)]
-        return 'DysonPureCoolV2State(' + ",".join(printable_fields(fields)) + ')'
+        return 'DysonPureCoolV2State(' + ",".join(printable_fields(fields)) \
+               + ')'
 
 
 class DysonEnvironmentalSensorV2State:
     """Environmental sensor state."""
-
-    @staticmethod
-    def is_environmental_state_message(payload):
-        """Return true if this message is a state message."""
-        json_message = json.loads(payload)
-        return json_message['msg'] in ["ENVIRONMENTAL-CURRENT-SENSOR-DATA"]
-
-    @staticmethod
-    def __get_field_value(state, field):
-        """Get field value."""
-        return state[field][1] if isinstance(state[field], list) else state[
-            field]
 
     def __init__(self, payload):
         """Create a new Environmental sensor state.
@@ -163,38 +144,41 @@ class DysonEnvironmentalSensorV2State:
         json_message = json.loads(payload)
         data = json_message['data']
 
-        temperature = self.__get_field_value(data, 'tact')
+        temperature = get_field_value(data, 'tact')
         self._temperature = 0 if temperature in SENSOR_INIT_STATES else float(
             temperature) / 10
 
-        humidity = self.__get_field_value(data, 'hact')
+        humidity = get_field_value(data, 'hact')
         self._humidity = 0 if humidity in SENSOR_INIT_STATES else int(humidity)
 
-        particulate_matter_25 = self.__get_field_value(data, 'pm25')
-        self._particulate_matter_25 = 0 if particulate_matter_25 in SENSOR_INIT_STATES \
+        particulate_matter_25 = get_field_value(data, 'pm25')
+        self._particulate_matter_25 = 0 \
+            if particulate_matter_25 in SENSOR_INIT_STATES \
             else int(particulate_matter_25)
-        
-        particulate_matter_10 = self.__get_field_value(data, 'pm10')
-        self._particulate_matter_10 = 0 if particulate_matter_10 in SENSOR_INIT_STATES \
+
+        particulate_matter_10 = get_field_value(data, 'pm10')
+        self._particulate_matter_10 = 0 \
+            if particulate_matter_10 in SENSOR_INIT_STATES \
             else int(particulate_matter_10)
 
-        volatile_organic_compounds = self.__get_field_value(data, 'va10')
-        self._volatile_organic_compounds = 0 if volatile_organic_compounds in SENSOR_INIT_STATES \
+        volatile_organic_compounds = get_field_value(data, 'va10')
+        self._volatile_organic_compounds = 0 \
+            if volatile_organic_compounds in SENSOR_INIT_STATES \
             else int(volatile_organic_compounds)
 
-        nitrogen_dioxide = self.__get_field_value(data, 'noxl')
+        nitrogen_dioxide = get_field_value(data, 'noxl')
         self._nitrogen_dioxide = 0 if nitrogen_dioxide in SENSOR_INIT_STATES \
             else int(nitrogen_dioxide)
-        
-        p25r = self.__get_field_value(data, 'p25r')
+
+        p25r = get_field_value(data, 'p25r')
         self._p25r = 0 if p25r in SENSOR_INIT_STATES \
             else int(p25r)
 
-        p10r = self.__get_field_value(data, 'p10r')
+        p10r = get_field_value(data, 'p10r')
         self._p10r = 0 if p10r in SENSOR_INIT_STATES \
             else int(p10r)
 
-        sleep_timer = self.__get_field_value(data, 'sltm')
+        sleep_timer = get_field_value(data, 'sltm')
         self._sleep_timer = 0 if sleep_timer in SENSOR_INIT_STATES \
             else int(sleep_timer)
 
@@ -210,12 +194,12 @@ class DysonEnvironmentalSensorV2State:
 
     @property
     def particulate_matter_25(self):
-        """particulate matter under 2.5micron."""
+        """Particulate matter under 2.5microns."""
         return self._particulate_matter_25
 
     @property
     def particulate_matter_10(self):
-        """particulate matter under 10micron """
+        """Particulate matter under 10microns."""
         return self._particulate_matter_10
 
     @property
@@ -249,7 +233,8 @@ class DysonEnvironmentalSensorV2State:
                   ("humidity", str(self.humidity)),
                   ("particulate_matter_25", str(self.particulate_matter_25)),
                   ("particulate_matter_10", str(self.particulate_matter_10)),
-                  ("volatile_organic_compounds", str(self.volatile_organic_compounds)),
+                  ("volatile_organic_compounds",
+                   str(self.volatile_organic_compounds)),
                   ("nitrogen_dioxide", str(self.nitrogen_dioxide)),
                   ("p25r", str(self.p25r)),
                   ("p10r", str(self.p10r)),

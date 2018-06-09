@@ -1,6 +1,6 @@
 """Dyson exceptions."""
 
-# pylint: disable=useless-super-delegation
+# pylint: disable=useless-super-delegation,inconsistent-return-statements
 
 
 class DysonInvalidTargetTemperatureException(Exception):
