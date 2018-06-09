@@ -3,6 +3,8 @@
 # pylint: disable=too-many-public-methods,too-many-instance-attributes
 
 import json
+
+from libpurecoollink.const import SENSOR_INIT_STATES
 from .utils import printable_fields
 
 
@@ -162,27 +164,39 @@ class DysonEnvironmentalSensorV2State:
         data = json_message['data']
 
         temperature = self.__get_field_value(data, 'tact')
-        self._temperature = 0 if temperature == 'OFF' else float(
+        self._temperature = 0 if temperature in SENSOR_INIT_STATES else float(
             temperature) / 10
 
         humidity = self.__get_field_value(data, 'hact')
-        self._humidity = 0 if humidity == 'OFF' else int(humidity)
+        self._humidity = 0 if humidity in SENSOR_INIT_STATES else int(humidity)
 
-        self._particulate_matter_25 = int(self.__get_field_value(data, 'pm25'))
-        self._particulate_matter_10 = int(self.__get_field_value(data, 'pm10'))
+        particulate_matter_25 = self.__get_field_value(data, 'pm25')
+        self._particulate_matter_25 = 0 if particulate_matter_25 in SENSOR_INIT_STATES \
+            else int(particulate_matter_25)
+        
+        particulate_matter_10 = self.__get_field_value(data, 'pm10')
+        self._particulate_matter_10 = 0 if particulate_matter_10 in SENSOR_INIT_STATES \
+            else int(particulate_matter_10)
 
         volatile_organic_compounds = self.__get_field_value(data, 'va10')
-        self._volatile_organic_compounds = 0 \
-            if volatile_organic_compounds == 'INIT' \
+        self._volatile_organic_compounds = 0 if volatile_organic_compounds in SENSOR_INIT_STATES \
             else int(volatile_organic_compounds)
 
-        self._nitrogen_dioxide = int(self.__get_field_value(data, 'noxl'))
+        nitrogen_dioxide = self.__get_field_value(data, 'noxl')
+        self._nitrogen_dioxide = 0 if nitrogen_dioxide in SENSOR_INIT_STATES \
+            else int(nitrogen_dioxide)
+        
+        p25r = self.__get_field_value(data, 'p25r')
+        self._p25r = 0 if p25r in SENSOR_INIT_STATES \
+            else int(p25r)
 
-        self._p25r = int(self.__get_field_value(data, 'p25r'))
-        self._p10r = int(self.__get_field_value(data, 'p10r'))
+        p10r = self.__get_field_value(data, 'p10r')
+        self._p10r = 0 if p10r in SENSOR_INIT_STATES \
+            else int(p10r)
 
-        sltm = self.__get_field_value(data, 'sltm')
-        self._sleep_timer = 0 if sltm == 'OFF' else int(sltm)
+        sleep_timer = self.__get_field_value(data, 'sltm')
+        self._sleep_timer = 0 if sleep_timer in SENSOR_INIT_STATES \
+            else int(sleep_timer)
 
     @property
     def temperature(self):
