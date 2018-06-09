@@ -9,6 +9,8 @@ DYSON_PURE_HOT_COOL_LINK_TOUR = "455"
 DYSON_360_EYE = "N223"
 DYSON_PURE_COOL = "438"
 
+SLEEP_TIMER_OFF = 'OFF'
+
 
 class FanMode(Enum):
     """Fan mode."""
@@ -23,6 +25,13 @@ class Oscillation(Enum):
 
     OSCILLATION_ON = 'ON'
     OSCILLATION_OFF = 'OFF'
+
+
+class OscillationV2(Enum):
+    """Oscillation."""
+
+    OSCILLATION_ON = 'OION'
+    OSCILLATION_OFF = 'OIOF'
 
 
 class NightMode(Enum):

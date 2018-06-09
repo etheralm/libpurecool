@@ -1,3 +1,5 @@
+from libpurecoollink.const import Oscillation, FanPower, SLEEP_TIMER_OFF, FanSpeed, FrontalDirection, AutoMode, \
+    NightMode
 from libpurecoollink.dyson_pure_cool_link import DysonPureCoolLink
 from libpurecoollink.utils import printable_fields
 
@@ -37,11 +39,11 @@ class DysonPureCool(DysonPureCoolLink):
             continuous_monitoring else self._current_state.continuous_monitoring
         f_speed = fan_speed.value if fan_speed \
             else self._current_state.speed
-        f_sleep_timer = sleep_timer if sleep_timer or isinstance(
+        f_sleep_timer = str(sleep_timer) if sleep_timer or isinstance(
             sleep_timer, int) else "STET"
-        f_oscillation_angle_low = oscillation_angle_low \
+        f_oscillation_angle_low = str(oscillation_angle_low) \
             if oscillation_angle_low else self._current_state.oscillation_angle_low
-        f_oscillation_angle_high = oscillation_angle_high \
+        f_oscillation_angle_high = str(oscillation_angle_high) \
             if oscillation_angle_high else self._current_state.oscillation_angle_high
         f_reset_filter = reset_filter.value if reset_filter \
             else "STET"
@@ -55,18 +57,190 @@ class DysonPureCool(DysonPureCoolLink):
             "rhtm": f_continuous_monitoring,  # monitor air quality
             "fnsp": f_speed,  # monitor air quality
             "sltm": f_sleep_timer,  # monitor air quality
+            "ancp": "CUST",
             "osal": f_oscillation_angle_low,  # monitor air quality
             "osau": f_oscillation_angle_high,  # monitor air quality
             # when inactive
             "rstf": f_reset_filter,  # reset filter lifecycle
         }
 
-    def set_configuration(self, **kwargs):
-        """Configure fan.
-
-        :param kwargs: Parameters
+    def turn_on(self):
         """
-        data = self._parse_command_args(**kwargs)
+
+        :return:
+        """
+        data = {
+            "fpwr": FanPower.POWER_ON.value
+        }
+        self.set_fan_configuration(data)
+
+    def turn_off(self):
+        """
+
+        :return:
+        """
+        data = {
+            "fpwr": FanPower.POWER_OFF.value
+        }
+        self.set_fan_configuration(data)
+
+    def enable_oscillation(self, oscillation_angle_low, oscillation_angle_high):
+        """Sets the oscillation settings of the fan.
+
+        :param oscillation_angle_low:
+        :param oscillation_angle_high:
+        """
+
+        if not isinstance(oscillation_angle_low, int):
+            raise TypeError('oscillation_angle_low must be an int')
+        if not isinstance(oscillation_angle_high, int):
+            raise TypeError('oscillation_angle_high must be an int')
+
+        if not 5 <= oscillation_angle_low <= 355:
+            raise ValueError('oscillation_angle_low must be between 5 and 355')
+        if not 5 <= oscillation_angle_high <= 355:
+                raise ValueError('oscillation_angle_high must be between 5 and 355')
+
+        if oscillation_angle_high < oscillation_angle_low:
+            raise ValueError('oscillation_angle_high must be equal or bigger than oscillation_angle_low')
+        if oscillation_angle_high != oscillation_angle_low and \
+                oscillation_angle_high - oscillation_angle_low < 30:
+            raise ValueError('oscillation_angle_high must be be bigger than oscillation_angle_low by at least 30')
+
+        data = {
+            "oson": Oscillation.OSCILLATION_ON.value,
+            "fpwr": FanPower.POWER_ON.value,
+            "ancp": "CUST",
+            "osal": str(oscillation_angle_low),
+            "osau": str(oscillation_angle_high),
+        }
+        self.set_fan_configuration(data)
+
+    def disable_oscillation(self):
+        """
+
+        :return:
+        """
+
+        data = {
+            "oson": Oscillation.OSCILLATION_OFF.value
+        }
+        self.set_fan_configuration(data)
+
+    def enable_sleep_timer(self, duration):
+        """
+
+        :return:
+        """
+
+        if not isinstance(duration, int):
+            raise TypeError('duration must be an int')
+        if not 0 < duration <= 540:
+            raise ValueError('duration must be between 1 and 540')
+
+        data = {
+            "sltm": str(duration)
+        }
+
+        self.set_fan_configuration(data)
+
+    def disable_sleep_timer(self):
+        """
+
+        :return:
+        """
+
+        data = {
+            "sltm": SLEEP_TIMER_OFF
+        }
+
+        self.set_fan_configuration(data)
+
+    def set_fan_speed(self, fan_speed):
+        """
+
+        :param fan_speed:
+        :return:
+        """
+
+        if not isinstance(fan_speed, FanSpeed):
+            raise TypeError('fan_speed must be a FanSpeed enumeration')
+
+        data = {
+            "fnsp": fan_speed.value
+        }
+
+        self.set_fan_configuration(data)
+
+    def enable_frontal_direction(self):
+        """
+
+        :return:
+        """
+
+        data = {
+            "fdir": FrontalDirection.FRONTAL_ON.value
+        }
+
+        self.set_fan_configuration(data)
+
+    def disable_frontal_direction(self):
+        """
+
+        :return:
+        """
+
+        data = {
+            "fdir": FrontalDirection.FRONTAL_OFF.value
+        }
+
+        self.set_fan_configuration(data)
+
+    def enable_auto_mode(self):
+        """
+        :return:
+        """
+
+        data = {
+            "auto": AutoMode.AUTO_ON.value
+        }
+
+        self.set_fan_configuration(data)
+
+    def disable_auto_mode(self):
+        """
+
+        :return:
+        """
+
+        data = {
+            "auto": AutoMode.AUTO_OFF.value
+        }
+
+        self.set_fan_configuration(data)
+
+    def enable_night_mode(self):
+        """
+
+        :return:
+        """
+
+        data = {
+            "nmod": NightMode.NIGHT_MODE_ON.value
+        }
+
+        self.set_fan_configuration(data)
+
+    def disable_night_mode(self):
+        """
+
+        :return:
+        """
+
+        data = {
+            "nmod": NightMode.NIGHT_MODE_OFF.value
+        }
+
         self.set_fan_configuration(data)
 
     def __repr__(self):

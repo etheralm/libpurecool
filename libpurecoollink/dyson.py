@@ -37,6 +37,7 @@ class DysonAccount:
 
     def login(self):
         """Login to dyson web services."""
+        requests.packages.urllib3.disable_warnings()
         request_body = {
             "Email": self._email,
             "Password": self._password
