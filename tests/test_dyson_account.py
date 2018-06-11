@@ -48,6 +48,9 @@ def _mocked_login_post(*args, **kwargs):
 def _mocked_list_devices(*args, **kwargs):
     url = 'https://{0}{1}'.format('api.cp.dyson.com',
                                   '/v1/provisioningservice/manifest')
+    url_v2 = 'https://{0}{1}'.format('api.cp.dyson.com',
+                                     '/v2/provisioningservice/manifest')
+
     if args[0] == url:
         return MockResponse(
             [
@@ -93,6 +96,34 @@ def _mocked_list_devices(*args, **kwargs):
             ]
         )
 
+    if args[0] == url_v2:
+        return MockResponse(
+            [
+                {
+                    "Serial": "AB1-EU-DBD1231B",
+                    "Name": "device-1",
+                    "Version": "02.05.001.0006",
+                    "AutoUpdate": True,
+                    "LocalCredentials": "1/aJ5t52WvAfn+z+fjDuef86kQDQPefbQ6/"
+                                        "70ZGysII1Ke1i0ZHakFH84DZuxsSQ4KTT2v"
+                                        "bCm7uYeTORULKLKQ==",
+                    "NewVersionAvailable": False,
+                    "ProductType": "438"
+                },
+                {
+                    "Serial": "DB1-US-DBD1231C",
+                    "Name": "device-2",
+                    "Version": "02.05.001.0006",
+                    "LocalCredentials": "1/aJ5t52WvAfn+z+fjDuebkH6aWl2H5Q1vCq"
+                                        "CQSjJfENzMefozxWaDoW1yDluPsi09SGT5nW"
+                                        "MxqxtrfkxnUtRQ==",
+                    "AutoUpdate": True,
+                    "NewVersionAvailable": False,
+                    "ProductType": "438"
+                }
+            ]
+        )
+
 
 class TestDysonAccount(unittest.TestCase):
     def setUp(self):
@@ -127,8 +158,8 @@ class TestDysonAccount(unittest.TestCase):
         self.assertEqual(mocked_login.call_count, 1)
         self.assertTrue(dyson_account.logged)
         devices = dyson_account.devices()
-        self.assertEqual(mocked_list_devices.call_count, 1)
-        self.assertEqual(len(devices), 3)
+        self.assertEqual(mocked_list_devices.call_count, 2)
+        self.assertEqual(len(devices), 5)
         self.assertTrue(isinstance(devices[0], DysonPureCoolLink))
         self.assertTrue(isinstance(devices[1], DysonPureHotCoolLink))
         self.assertTrue(isinstance(devices[2], Dyson360Eye))

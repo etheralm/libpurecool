@@ -2,9 +2,9 @@
 
 # pylint: disable=too-many-locals
 
-from libpurecoollink.const import Oscillation, FanPower, \
+from libpurecoollink.const import FanPower, \
     SLEEP_TIMER_OFF, FanSpeed, FrontalDirection, AutoMode, \
-    NightMode
+    NightMode, OscillationV2
 from libpurecoollink.dyson_pure_cool_link import DysonPureCoolLink
 from libpurecoollink.utils import printable_fields
 
@@ -130,18 +130,18 @@ class DysonPureCool(DysonPureCoolLink):
                 self._current_state.oscillation_angle_high
 
         data = {
-            "oson": Oscillation.OSCILLATION_ON.value,
+            "oson": OscillationV2.OSCILLATION_ON.value,
             "fpwr": FanPower.POWER_ON.value,
             "ancp": "CUST",
-            "osal": str(oscillation_angle_low),
-            "osau": str(oscillation_angle_high),
+            "osal": str(oscillation_angle_low).rjust(4, '0'),
+            "osau": str(oscillation_angle_high).rjust(4, '0'),
         }
         self.set_fan_configuration(data)
 
     def disable_oscillation(self):
         """Disable oscillation."""
         data = {
-            "oson": Oscillation.OSCILLATION_OFF.value
+            "oson": OscillationV2.OSCILLATION_OFF.value
         }
         self.set_fan_configuration(data)
 
@@ -156,7 +156,7 @@ class DysonPureCool(DysonPureCoolLink):
             raise ValueError('duration must be between 1 and 540')
 
         data = {
-            "sltm": str(duration)
+            "sltm": str(duration).rjust(4, '0')
         }
 
         self.set_fan_configuration(data)
