@@ -1,6 +1,7 @@
 import json
 import unittest
 from unittest import mock
+from unittest.mock import Mock
 
 from libpurecoollink.const import FanPower, FrontalDirection, AutoMode, \
     OscillationV2, NightMode, ContinuousMonitoring, \
@@ -653,3 +654,25 @@ class TestPureCool(unittest.TestCase):
                          "particulate_matter_10=0,"
                          "volatile_organic_compounds=0,nitrogen_dioxide=0,"
                          "p25r=0,p10r=0,sleep_timer=0)")
+
+    def test_on_state_v2_message(self):
+        def on_message(msg):
+            assert isinstance(msg, DysonPureCoolV2State)
+
+        self._device.add_message_listener(on_message)
+        msg = Mock()
+        payload = open("tests/data/state_pure_cool.json", "r").read()
+        msg.payload = Mock()
+        msg.payload.decode.return_value = payload
+        DysonPureCool.on_message(None, self._device, msg)
+
+    def test_on_sensor_v2_message(self):
+        def on_message(msg):
+            assert isinstance(msg, DysonEnvironmentalSensorV2State)
+
+        self._device.add_message_listener(on_message)
+        msg = Mock()
+        payload = open("tests/data/sensor_pure_cool.json", "r").read()
+        msg.payload = Mock()
+        msg.payload.decode.return_value = payload
+        DysonPureCool.on_message(None, self._device, msg)
