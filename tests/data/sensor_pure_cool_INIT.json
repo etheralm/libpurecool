@@ -1,0 +1,15 @@
+{
+    "msg": "ENVIRONMENTAL-CURRENT-SENSOR-DATA",
+    "time": "2018-06-06T14:04:02.000Z",
+    "data": {
+        "tact": "INIT",
+        "hact": "INIT",
+        "pm25": "INIT",
+        "pm10": "INIT",
+        "va10": "INIT",
+        "noxl": "INIT",
+        "p25r": "INIT",
+        "p10r": "INIT",
+        "sltm": "INIT"
+    }
+}

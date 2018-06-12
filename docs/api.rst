@@ -6,9 +6,11 @@ Developer Interface
 .. module:: libpurecoollink.dyson
 .. module:: libpurecoollink.dyson_device
 .. module:: libpurecoollink.dyson_360_eye
+.. module:: libpurecoollink.dyson_pure_cool
 .. module:: libpurecoollink.dyson_pure_cool_link
 .. module:: libpurecoollink.dyson_pure_hotcool_link
 .. module:: libpurecoollink.dyson_pure_state
+.. module:: libpurecoollink.dyson_pure_state_v2
 
 This part of the documentation covers all the interfaces of Libpurecoollink.
 
@@ -33,6 +35,13 @@ NetworkDevice
 
 Fan/Purifier devices
 ~~~~~~~~~~~~~~~~~~~~
+
+DysonPureCool
+#################
+
+.. autoclass:: libpurecoollink.dyson_pure_cool.DysonPureCool
+    :members:
+    :inherited-members:
 
 DysonPureCoolLink
 #################

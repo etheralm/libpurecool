@@ -1,0 +1,15 @@
+{
+    "msg": "ENVIRONMENTAL-CURRENT-SENSOR-DATA",
+    "time": "2018-06-06T14:04:02.000Z",
+    "data": {
+        "tact": "OFF",
+        "hact": "OFF",
+        "pm25": "OFF",
+        "pm10": "OFF",
+        "va10": "OFF",
+        "noxl": "OFF",
+        "p25r": "OFF",
+        "p10r": "OFF",
+        "sltm": "OFF"
+    }
+}

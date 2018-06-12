@@ -4,10 +4,11 @@ from unittest import mock
 
 from libpurecoollink.const import FanPower, FrontalDirection, AutoMode, \
     OscillationV2, NightMode, ContinuousMonitoring, \
-    FanSpeed, ResetFilter, DYSON_PURE_COOL
+    FanSpeed, ResetFilter, DYSON_PURE_COOL, SLEEP_TIMER_OFF
 from libpurecoollink.dyson_device import NetworkDevice
 from libpurecoollink.dyson_pure_cool import DysonPureCool
-from libpurecoollink.dyson_pure_state_v2 import DysonPureCoolV2State
+from libpurecoollink.dyson_pure_state_v2 import \
+    DysonPureCoolV2State, DysonEnvironmentalSensorV2State
 
 
 def _mocked_send_command(*args):
@@ -565,3 +566,90 @@ class TestPureCool(unittest.TestCase):
 
         self.assertEqual(mocked_publish.call_count, 3)
         self._device.disconnect()
+
+    def test_dyson_v2_state(self):
+        dyson_state = DysonPureCoolV2State(
+            open("tests/data/state_pure_cool.json", "r").read())
+        self.assertEqual(dyson_state.fan_power, FanPower.POWER_OFF.value)
+        self.assertEqual(dyson_state.front_direction,
+                         FrontalDirection.FRONTAL_OFF.value)
+        self.assertEqual(dyson_state.auto_mode, AutoMode.AUTO_OFF.value)
+        self.assertEqual(dyson_state.oscillation_status, "OFF")
+        self.assertEqual(dyson_state.oscillation,
+                         OscillationV2.OSCILLATION_OFF.value)
+        self.assertEqual(dyson_state.night_mode,
+                         NightMode.NIGHT_MODE_OFF.value)
+        self.assertEqual(dyson_state.continuous_monitoring,
+                         ContinuousMonitoring.MONITORING_OFF.value)
+        self.assertEqual(dyson_state.fan_state, "FAN")
+        self.assertEqual(dyson_state.night_mode_speed, "0004")
+        self.assertEqual(dyson_state.speed, FanSpeed.FAN_SPEED_AUTO.value)
+        self.assertEqual(dyson_state.carbon_filter_state, "0100")
+        self.assertEqual(dyson_state.hepa_filter_state, "0100")
+        self.assertEqual(dyson_state.sleep_timer, SLEEP_TIMER_OFF)
+        self.assertEqual(dyson_state.oscillation_angle_low, "0063")
+        self.assertEqual(dyson_state.oscillation_angle_high, "0243")
+        self.assertEqual(dyson_state.__repr__(),
+                         "DysonPureCoolV2State(fan_power=OFF,"
+                         "front_direction=OFF,auto_mode=OFF,"
+                         "oscillation_status=OFF,oscillation=OIOF,"
+                         "night_mode=OFF,continuous_monitoring=OFF,"
+                         "fan_state=FAN,night_mode_speed=0004,"
+                         "speed=AUTO,carbon_filter_state=0100,"
+                         "hepa_filter_state=0100,sleep_timer=OFF,"
+                         "oscillation_angle_low=0063,"
+                         "oscillation_angle_high=0243)")
+
+    def test_dyson_v2_sensor_state(self):
+        dyson_sensor_state = DysonEnvironmentalSensorV2State(
+            open("tests/data/sensor_pure_cool.json", "r").read())
+        self.assertEqual(dyson_sensor_state.temperature, 297.7)
+        self.assertEqual(dyson_sensor_state.humidity, 58)
+        self.assertEqual(dyson_sensor_state.particulate_matter_25, 9)
+        self.assertEqual(dyson_sensor_state.particulate_matter_10, 5)
+        self.assertEqual(dyson_sensor_state.volatile_organic_compounds, 4)
+        self.assertEqual(dyson_sensor_state.volatile_organic_compounds, 4)
+        self.assertEqual(dyson_sensor_state.p25r, 10)
+        self.assertEqual(dyson_sensor_state.p10r, 9)
+        self.assertEqual(dyson_sensor_state.__repr__(),
+                         "DysonEnvironmentalSensorV2State("
+                         "temperature=297.7,humidity=58,"
+                         "particulate_matter_25=9,particulate_matter_10=5,"
+                         "volatile_organic_compounds=4,nitrogen_dioxide=11,"
+                         "p25r=10,p10r=9,sleep_timer=0)")
+
+    def test_dyson_v2_sensor_state_off(self):
+        dyson_sensor_state = DysonEnvironmentalSensorV2State(
+            open("tests/data/sensor_pure_cool_off.json", "r").read())
+        self.assertEqual(dyson_sensor_state.temperature, 0)
+        self.assertEqual(dyson_sensor_state.humidity, 0)
+        self.assertEqual(dyson_sensor_state.particulate_matter_25, 0)
+        self.assertEqual(dyson_sensor_state.particulate_matter_10, 0)
+        self.assertEqual(dyson_sensor_state.volatile_organic_compounds, 0)
+        self.assertEqual(dyson_sensor_state.volatile_organic_compounds, 0)
+        self.assertEqual(dyson_sensor_state.p25r, 0)
+        self.assertEqual(dyson_sensor_state.p10r, 0)
+        self.assertEqual(dyson_sensor_state.__repr__(),
+                         "DysonEnvironmentalSensorV2State("
+                         "temperature=0,humidity=0,particulate_matter_25=0,"
+                         "particulate_matter_10=0,"
+                         "volatile_organic_compounds=0,nitrogen_dioxide=0,"
+                         "p25r=0,p10r=0,sleep_timer=0)")
+
+    def test_dyson_v2_sensor_state_init(self):
+        dyson_sensor_state = DysonEnvironmentalSensorV2State(
+            open("tests/data/sensor_pure_cool_init.json", "r").read())
+        self.assertEqual(dyson_sensor_state.temperature, 0)
+        self.assertEqual(dyson_sensor_state.humidity, 0)
+        self.assertEqual(dyson_sensor_state.particulate_matter_25, 0)
+        self.assertEqual(dyson_sensor_state.particulate_matter_10, 0)
+        self.assertEqual(dyson_sensor_state.volatile_organic_compounds, 0)
+        self.assertEqual(dyson_sensor_state.volatile_organic_compounds, 0)
+        self.assertEqual(dyson_sensor_state.p25r, 0)
+        self.assertEqual(dyson_sensor_state.p10r, 0)
+        self.assertEqual(dyson_sensor_state.__repr__(),
+                         "DysonEnvironmentalSensorV2State("
+                         "temperature=0,humidity=0,particulate_matter_25=0,"
+                         "particulate_matter_10=0,"
+                         "volatile_organic_compounds=0,nitrogen_dioxide=0,"
+                         "p25r=0,p10r=0,sleep_timer=0)")
