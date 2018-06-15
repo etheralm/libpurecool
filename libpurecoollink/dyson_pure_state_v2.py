@@ -4,7 +4,7 @@
 
 import json
 
-from libpurecoollink.const import SENSOR_INIT_STATES
+from .const import SENSOR_INIT_STATES
 from .utils import printable_fields, get_field_value
 
 

@@ -9,7 +9,7 @@ from requests.auth import HTTPBasicAuth
 
 import urllib3
 
-from libpurecoollink.dyson_pure_cool import DysonPureCool
+from .dyson_pure_cool import DysonPureCool
 from .utils import is_360_eye_device, \
     is_heating_device, is_dyson_pure_cool_device
 

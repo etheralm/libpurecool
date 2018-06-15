@@ -2,11 +2,11 @@
 
 # pylint: disable=too-many-locals
 
-from libpurecoollink.const import FanPower, \
+from .const import FanPower, \
     SLEEP_TIMER_OFF, FanSpeed, FrontalDirection, AutoMode, \
     NightMode, OscillationV2
-from libpurecoollink.dyson_pure_cool_link import DysonPureCoolLink
-from libpurecoollink.utils import printable_fields
+from .dyson_pure_cool_link import DysonPureCoolLink
+from .utils import printable_fields
 
 
 class DysonPureCool(DysonPureCoolLink):

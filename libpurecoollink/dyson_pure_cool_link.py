@@ -12,7 +12,7 @@ from queue import Queue, Empty
 
 import paho.mqtt.client as mqtt
 
-from libpurecoollink.dyson_pure_state_v2 import \
+from .dyson_pure_state_v2 import \
     DysonEnvironmentalSensorV2State, DysonPureCoolV2State
 from .dyson_device import DysonDevice, NetworkDevice, DEFAULT_PORT
 from .utils import printable_fields, support_heating, is_pure_cool_v2
