@@ -121,6 +121,18 @@ def _mocked_list_devices(*args, **kwargs):
                     "NewVersionAvailable": False,
                     "ProductType": "438"
                 }
+                },
+                {
+                    "Serial": "DB1-US-DBD1231D",
+                    "Name": "device-3",
+                    "Version": "02.05.001.0006",
+                    "LocalCredentials": "1/aJ5t52WvAfn+z+fjDuebkH6aWl2H5Q1vCq"
+                                        "CQSjJfENzMefozxWaDoW1yDluPsi09SGT5nW"
+                                        "MxqxtrfkxnUtRQ==",
+                    "AutoUpdate": True,
+                    "NewVersionAvailable": False,
+                    "ProductType": "520"
+                }
             ]
         )
 
@@ -159,7 +171,7 @@ class TestDysonAccount(unittest.TestCase):
         self.assertTrue(dyson_account.logged)
         devices = dyson_account.devices()
         self.assertEqual(mocked_list_devices.call_count, 2)
-        self.assertEqual(len(devices), 5)
+        self.assertEqual(len(devices), 6)
         self.assertTrue(isinstance(devices[0], DysonPureCoolLink))
         self.assertTrue(isinstance(devices[1], DysonPureHotCoolLink))
         self.assertTrue(isinstance(devices[2], Dyson360Eye))

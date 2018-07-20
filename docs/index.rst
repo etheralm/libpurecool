@@ -28,6 +28,7 @@ Supported devices
 ~~~~~~~~~~~~~~~~~
 
 -  Dyson pure cool tower (TP04)
+-  Dyson pure cool desk (DP04)
 -  Dyson pure cool link devices (Tower and Desk)
 -  Dyson Cool+Hot devices
 -  Dyson 360 Eye robot vacuum
@@ -46,7 +47,7 @@ The following commands are supported:
   -  Turn on/off
   -  Set speed
   -  Turn on/off oscillation
-  -  Adjust oscillation angle (TP04)
+  -  Adjust oscillation angle (TP04/DP04)
   -  Set Auto mode
   -  Set night mode
   -  Set sleep timer

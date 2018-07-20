@@ -26,10 +26,12 @@ class TestUtils(unittest.TestCase):
 
     def test_is_pure_cool_v2(self):
         self.assertTrue(is_pure_cool_v2("438"))
+        self.assertTrue(is_pure_cool_v2("520"))
         self.assertFalse(is_pure_cool_v2("N223"))
 
     def test_is_dyson_pure_cool_device(self):
         self.assertTrue(is_dyson_pure_cool_device({"ProductType": "438"}))
+        self.assertTrue(is_dyson_pure_cool_device({"ProductType": "520"}))
         self.assertFalse(is_dyson_pure_cool_device({"ProductType": "469"}))
 
     def test_printable_fields(self):
