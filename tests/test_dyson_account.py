@@ -120,7 +120,6 @@ def _mocked_list_devices(*args, **kwargs):
                     "AutoUpdate": True,
                     "NewVersionAvailable": False,
                     "ProductType": "438"
-                }
                 },
                 {
                     "Serial": "DB1-US-DBD1231D",

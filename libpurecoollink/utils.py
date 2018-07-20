@@ -71,7 +71,8 @@ def is_360_eye_device(json_payload):
 
 def is_dyson_pure_cool_device(json_payload):
     """Return true if this json payload is a v2 dyson pure cool device."""
-    if json_payload['ProductType'] in [DYSON_PURE_COOL, DYSON_PURE_COOL_DESKTOP]:
+    if json_payload['ProductType'] in [DYSON_PURE_COOL,
+                                       DYSON_PURE_COOL_DESKTOP]:
         return True
     return False
 
