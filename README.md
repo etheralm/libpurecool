@@ -17,6 +17,7 @@ http://libpurecoollink.readthedocs.io
 ### Supported devices
 
 * Dyson pure cool tower (TP04)
+* Dyson pure cool desk (DP04)
 * Dyson pure cool link devices (Tower and Desk)
 * Dyson pure cool+hot devices
 * Dyson 360 Eye robot vacuum
@@ -36,7 +37,7 @@ The following feature are supported:
     * Set Air Quality target (Normal, High, Better)
     * Enable/disable standby monitoring (the device continue to update sensors when in standby)
     * Reset filter life
-    * Adjust oscillation angle (TP04)
+    * Adjust oscillation angle (TP04/DP04)
 * Cool+Hot purifier/fan devices
     * Set heat mode
     * Set heat target
