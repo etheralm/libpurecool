@@ -3,7 +3,7 @@ import json
 import base64
 from Crypto.Cipher import AES
 from .const import DYSON_PURE_HOT_COOL_LINK_TOUR, \
-    DYSON_360_EYE, DYSON_PURE_COOL
+    DYSON_360_EYE, DYSON_PURE_COOL, DYSON_PURE_COOL_DESKTOP
 
 
 def support_heating(product_type):
@@ -71,7 +71,8 @@ def is_360_eye_device(json_payload):
 
 def is_dyson_pure_cool_device(json_payload):
     """Return true if this json payload is a v2 dyson pure cool device."""
-    if json_payload['ProductType'] == DYSON_PURE_COOL:
+    if json_payload['ProductType'] in \
+            [DYSON_PURE_COOL, DYSON_PURE_COOL_DESKTOP]:
         return True
     return False
 
