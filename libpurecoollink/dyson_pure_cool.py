@@ -124,10 +124,12 @@ class DysonPureCool(DysonPureCoolLink):
                 raise ValueError('oscillation_angle_high must be be bigger '
                                  'than oscillation_angle_low by at least 30')
         else:
-            oscillation_angle_low = \
-                self._current_state.oscillation_angle_low
-            oscillation_angle_high = \
-                self._current_state.oscillation_angle_high
+            if not oscillation_angle_low:
+                oscillation_angle_low = \
+                    self._current_state.oscillation_angle_low
+            if not oscillation_angle_high:
+                oscillation_angle_high = \
+                    self._current_state.oscillation_angle_high
 
         data = {
             "oson": OscillationV2.OSCILLATION_ON.value,

@@ -23,7 +23,7 @@ PROJECT_CLASSIFIERS = [
 
 setup(
     name="libpurecoollink",
-    version="0.4.2",
+    version="0.5.0",
     license="Apache License 2.0",
     url="http://libpurecoollink.readthedocs.io",
     download_url="https://github.com/CharlesBlonde/libpurecoollink",
@@ -37,6 +37,6 @@ setup(
     platforms='any',
     install_requires=REQUIRES,
     test_suite='tests',
-    keywords=['dyson', 'purecoollink', 'eye360', 'purehotcoollink'],
+    keywords=['dyson', 'purecoollink', 'eye360', 'purehotcoollink', 'purecool'],
     classifiers=PROJECT_CLASSIFIERS,
 )
