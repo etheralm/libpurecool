@@ -90,7 +90,6 @@ class DysonPureCool(DysonPureCoolLink):
                            oscillation_angle_low=None,
                            oscillation_angle_high=None):
         """Enable oscillation.
-
         Both angle arguments represent degrees.
         They must be ints between 5 and 355.
         The high angle must either be equal or
@@ -103,7 +102,6 @@ class DysonPureCool(DysonPureCoolLink):
         :param oscillation_angle_high: int between 5 and 355.
                                        Low angle of oscillation. Can be empty
         """
-
         if not oscillation_angle_low:
             oscillation_angle_low = \
                 int(self._current_state.oscillation_angle_low)
