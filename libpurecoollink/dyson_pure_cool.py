@@ -90,6 +90,7 @@ class DysonPureCool(DysonPureCoolLink):
                            oscillation_angle_low=None,
                            oscillation_angle_high=None):
         """Enable oscillation.
+
         Both angle arguments represent degrees.
         They must be ints between 5 and 355.
         The high angle must either be equal or
