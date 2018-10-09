@@ -103,33 +103,33 @@ class DysonPureCool(DysonPureCoolLink):
         :param oscillation_angle_high: int between 5 and 355.
                                        Low angle of oscillation. Can be empty
         """
-        if oscillation_angle_low and oscillation_angle_high:
-            if not isinstance(oscillation_angle_low, int):
-                raise TypeError('oscillation_angle_low must be an int')
-            if not isinstance(oscillation_angle_high, int):
-                raise TypeError('oscillation_angle_high must be an int')
 
-            if not 5 <= oscillation_angle_low <= 355:
-                raise ValueError('oscillation_angle_low must be '
-                                 'between 5 and 355')
-            if not 5 <= oscillation_angle_high <= 355:
-                raise ValueError('oscillation_angle_high must be '
-                                 'between 5 and 355')
+        if not oscillation_angle_low:
+            oscillation_angle_low = \
+                int(self._current_state.oscillation_angle_low)
+        if not oscillation_angle_high:
+            oscillation_angle_high = \
+                int(self._current_state.oscillation_angle_high)
 
-            if oscillation_angle_high < oscillation_angle_low:
-                raise ValueError('oscillation_angle_high must be equal '
-                                 'or bigger than oscillation_angle_low')
-            if oscillation_angle_high != oscillation_angle_low and \
-                    oscillation_angle_high - oscillation_angle_low < 30:
-                raise ValueError('oscillation_angle_high must be be bigger '
-                                 'than oscillation_angle_low by at least 30')
-        else:
-            if not oscillation_angle_low:
-                oscillation_angle_low = \
-                    self._current_state.oscillation_angle_low
-            if not oscillation_angle_high:
-                oscillation_angle_high = \
-                    self._current_state.oscillation_angle_high
+        if not isinstance(oscillation_angle_low, int):
+            raise TypeError('oscillation_angle_low must be an int')
+        if not isinstance(oscillation_angle_high, int):
+            raise TypeError('oscillation_angle_high must be an int')
+
+        if not 5 <= oscillation_angle_low <= 355:
+            raise ValueError('oscillation_angle_low must be '
+                             'between 5 and 355')
+        if not 5 <= oscillation_angle_high <= 355:
+            raise ValueError('oscillation_angle_high must be '
+                             'between 5 and 355')
+
+        if oscillation_angle_high < oscillation_angle_low:
+            raise ValueError('oscillation_angle_high must be equal '
+                             'or bigger than oscillation_angle_low')
+        if oscillation_angle_high != oscillation_angle_low and \
+                oscillation_angle_high - oscillation_angle_low < 30:
+            raise ValueError('oscillation_angle_high must be be bigger '
+                             'than oscillation_angle_low by at least 30')
 
         data = {
             "oson": OscillationV2.OSCILLATION_ON.value,
