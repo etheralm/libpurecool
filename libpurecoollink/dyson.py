@@ -86,9 +86,9 @@ class DysonAccount:
                     devices.append(DysonPureCool(device_v2))
 
             return devices
-        else:
-            _LOGGER.warning("Not logged to Dyson Web Services.")
-            raise DysonNotLoggedException()
+
+        _LOGGER.warning("Not logged to Dyson Web Services.")
+        raise DysonNotLoggedException()
 
     @property
     def logged(self):

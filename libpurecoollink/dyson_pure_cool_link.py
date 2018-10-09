@@ -26,7 +26,7 @@ _LOGGER = logging.getLogger(__name__)
 class DysonPureCoolLink(DysonDevice):
     """Dyson device (fan)."""
 
-    class DysonDeviceListener(object):
+    class DysonDeviceListener:
         """Message listener."""
 
         def __init__(self, serial, add_device_function):
