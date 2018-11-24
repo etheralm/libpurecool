@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: libpurecool
+Version: 0.5.0
+Summary: Dyson Pure Cool/Hot+Cool Link and 360 eye robot vacuum devices Python library
+Home-page: http://libpurecool.readthedocs.io
+Author: Charles Blonde
+Author-email: charles.blonde@gmail.com
+License: Apache License 2.0
+Download-URL: https://github.com/etheralm/libpurecool
+Description: UNKNOWN
+Keywords: dyson,purecoollink,eye360,purehotcoollink,purecool
+Platform: any
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Software Development :: Libraries

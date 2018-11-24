@@ -1,6 +1,6 @@
 import unittest
 
-from libpurecoollink.utils import support_heating, is_heating_device, \
+from libpurecool.utils import support_heating, is_heating_device, \
     is_360_eye_device, printable_fields, decrypt_password, \
     is_pure_cool_v2, is_dyson_pure_cool_device, get_field_value
 

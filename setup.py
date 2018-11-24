@@ -22,11 +22,11 @@ PROJECT_CLASSIFIERS = [
 ]
 
 setup(
-    name="libpurecoollink",
+    name="libpurecool",
     version="0.5.0",
     license="Apache License 2.0",
-    url="http://libpurecoollink.readthedocs.io",
-    download_url="https://github.com/CharlesBlonde/libpurecoollink",
+    url="http://libpurecool.readthedocs.io",
+    download_url="https://github.com/etheralm/libpurecool",
     author="Charles Blonde",
     author_email="charles.blonde@gmail.com",
     description="Dyson Pure Cool/Hot+Cool Link and 360 eye robot "

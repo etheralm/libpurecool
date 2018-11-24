@@ -4,10 +4,10 @@ from unittest import mock
 from unittest.mock import Mock
 import json
 
-from libpurecoollink.dyson_360_eye import Dyson360Eye, NetworkDevice, \
+from libpurecool.dyson_360_eye import Dyson360Eye, NetworkDevice, \
     Dyson360EyeState, Dyson360EyeMapGlobal, Dyson360EyeMapData, \
     Dyson360EyeMapGrid, Dyson360EyeTelemetryData, Dyson360Goodbye
-from libpurecoollink.const import PowerMode, Dyson360EyeMode
+from libpurecool.const import PowerMode, Dyson360EyeMode
 
 
 def _mocked_request_state(*args, **kwargs):

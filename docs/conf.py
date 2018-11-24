@@ -115,7 +115,7 @@ html_theme = 'alabaster'
 html_theme_options = {
     'show_powered_by': False,
     'github_user': 'CharlesBlonde',
-    'github_repo': 'libpurecoollink',
+    'github_repo': 'libpurecool',
     'github_banner': True,
     'show_related': False
 }
@@ -244,7 +244,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'libpurecoollink', 'Libpurecoollink Documentation',
+    ('index', 'libpurecool', 'Libpurecoollink Documentation',
      ['Charles Blonde'], 1)
 ]
 
