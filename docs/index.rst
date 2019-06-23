@@ -30,6 +30,7 @@ Supported devices
 -  Dyson pure cool tower (TP04)
 -  Dyson pure cool desk (DP04)
 -  Dyson pure cool link devices (Tower and Desk)
+-  Dyson pure hot+cool link (HP04)
 -  Dyson Cool+Hot devices
 -  Dyson 360 Eye robot vacuum
 

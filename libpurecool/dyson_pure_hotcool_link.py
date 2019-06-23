@@ -21,15 +21,19 @@ class DysonPureHotCoolLink(DysonPureCoolLink):
         heat_mode = kwargs.get('heat_mode')
         heat_target = kwargs.get('heat_target')
         focus_mode = kwargs.get('focus_mode')
+        fan_power = kwargs.get('fan_power')
         f_heat_mode = heat_mode.value if heat_mode \
             else self._current_state.heat_mode
         f_heat_target = heat_target if heat_target \
             else self._current_state.heat_target
         f_fan_focus = focus_mode.value if focus_mode \
             else self._current_state.focus_mode
+        f_fan_power = fan_power.value if fan_power \
+            else self._current_state.fan_power
         data["hmod"] = f_heat_mode
         data["ffoc"] = f_fan_focus
         data["hmax"] = f_heat_target
+        data["fpwr"] = f_fan_power
         return data
 
     def set_configuration(self, **kwargs):

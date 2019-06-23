@@ -19,6 +19,7 @@ http://libpurecoollink.readthedocs.io
 * Dyson pure cool tower (TP04)
 * Dyson pure cool desk (DP04)
 * Dyson pure cool link devices (Tower and Desk)
+* Dyson pure hot+cool link (HP04)
 * Dyson pure cool+hot devices
 * Dyson 360 Eye robot vacuum
 

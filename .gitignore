@@ -4,8 +4,7 @@ runtime/*
 .tox/
 .cache/
 libpurecoollink.egg-info/
-libpurecoollink/__pycache__/
-tests/__pycache__/
+__pycache__
 dist/*
 build/
 .SVN/

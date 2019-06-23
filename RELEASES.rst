@@ -1,3 +1,11 @@
+Version 0.5.1
+~~~~~~~~~~~~~
+
+:Date:
+    2019/06/23
+
+    - Add support for HP04 model
+
 Version 0.4.1
 ~~~~~~~~~~~~~
 
