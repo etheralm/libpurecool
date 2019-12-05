@@ -1,4 +1,4 @@
 [run]
-source = libpurecoollink
+source = libpurecool
 omit =
-    libpurecoollink/zeroconf.py
+    libpurecool/zeroconf.py
