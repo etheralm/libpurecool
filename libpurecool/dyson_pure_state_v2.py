@@ -241,3 +241,70 @@ class DysonEnvironmentalSensorV2State:
                   ("sleep_timer", str(self.sleep_timer))]
         return 'DysonEnvironmentalSensorV2State(' + ",".join(
             printable_fields(fields)) + ')'
+
+
+class DysonPureHotCoolV2State(DysonPureCoolV2State):
+    """Dyson device state."""
+
+    def __init__(self, payload):
+        """Create a new Dyson Hot+Cool state.
+
+        :param payload: Message payload
+        """
+        super().__init__(payload)
+
+        self._tilt = get_field_value(self._state, 'tilt')
+        self._fan_focus = get_field_value(self._state, 'ffoc')
+        self._heat_target = get_field_value(self._state, 'hmax')
+        self._heat_mode = get_field_value(self._state, 'hmod')
+        self._heat_state = get_field_value(self._state, 'hsta')
+
+    @property
+    def tilt(self):
+        """Return tilt status."""
+        return self._tilt
+
+    @property
+    def focus_mode(self):
+        """Focus the fan on one stream or spread."""
+        return self._fan_focus
+
+    @property
+    def heat_target(self):
+        """Heat target of the temperature."""
+        return self._heat_target
+
+    @property
+    def heat_mode(self):
+        """Heat mode on or off."""
+        return self._heat_mode
+
+    @property
+    def heat_state(self):
+        """Return heat state."""
+        return self._heat_state
+
+    def __repr__(self):
+        """Return a String representation."""
+        fields = [("fan_power", self.fan_power),
+                  ("front_direction", self.front_direction),
+                  ("auto_mode", self.auto_mode),
+                  ("oscillation_status", self.oscillation_status),
+                  ("oscillation", self.oscillation),
+                  ("night_mode", self.night_mode),
+                  ("continuous_monitoring", self.continuous_monitoring),
+                  ("fan_state", self.fan_state),
+                  ("night_mode_speed", self.night_mode_speed),
+                  ("speed", self.speed),
+                  ("carbon_filter_state", self.carbon_filter_state),
+                  ("hepa_filter_state", self.hepa_filter_state),
+                  ("sleep_timer", self.sleep_timer),
+                  ("oscillation_angle_low", self.oscillation_angle_low),
+                  ("oscillation_angle_high", self.oscillation_angle_high),
+                  ("tilt", self.tilt),
+                  ("focus_mode", self.focus_mode),
+                  ("heat_mode", self.heat_mode),
+                  ("heat_target", self.heat_target),
+                  ("heat_state", self.heat_state)]
+
+        return 'DysonHotCoolState(' + ",".join(printable_fields(fields)) + ')'

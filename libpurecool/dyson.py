@@ -10,8 +10,9 @@ from requests.auth import HTTPBasicAuth
 import urllib3
 
 from .dyson_pure_cool import DysonPureCool
+from .dyson_pure_hotcool import DysonPureHotCool
 from .utils import is_360_eye_device, \
-    is_heating_device, is_dyson_pure_cool_device
+    is_heating_device, is_dyson_pure_cool_device, is_heating_device_v2
 
 from .dyson_360_eye import Dyson360Eye
 from .dyson_pure_cool_link import DysonPureCoolLink
@@ -84,6 +85,8 @@ class DysonAccount:
             for device_v2 in device_v2_response.json():
                 if is_dyson_pure_cool_device(device_v2):
                     devices.append(DysonPureCool(device_v2))
+                elif is_heating_device_v2(device_v2):
+                    devices.append(DysonPureHotCool(device_v2))
 
             return devices
 

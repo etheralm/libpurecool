@@ -12,7 +12,17 @@ def support_heating(product_type):
 
     :param product_type Dyson device model
     """
-    if product_type in [DYSON_PURE_HOT_COOL_LINK_TOUR, DYSON_PURE_HOT_COOL]:
+    if product_type in [DYSON_PURE_HOT_COOL_LINK_TOUR]:
+        return True
+    return False
+
+
+def support_heating_v2(product_type):
+    """Return True if v2 device_model support heating mode, else False.
+
+    :param product_type Dyson device model
+    """
+    if product_type in [DYSON_PURE_HOT_COOL]:
         return True
     return False
 
@@ -30,8 +40,14 @@ def is_pure_cool_v2(product_type):
 
 def is_heating_device(json_payload):
     """Return true if this json payload is a hot+cool device."""
-    if json_payload['ProductType'] in [DYSON_PURE_HOT_COOL_LINK_TOUR,
-                                       DYSON_PURE_HOT_COOL]:
+    if json_payload['ProductType'] in [DYSON_PURE_HOT_COOL_LINK_TOUR]:
+        return True
+    return False
+
+
+def is_heating_device_v2(json_payload):
+    """Return true if this json payload is a v2 hot+cool device."""
+    if json_payload['ProductType'] in [DYSON_PURE_HOT_COOL]:
         return True
     return False
 
@@ -75,8 +91,7 @@ def is_360_eye_device(json_payload):
 def is_dyson_pure_cool_device(json_payload):
     """Return true if this json payload is a v2 dyson pure cool device."""
     if json_payload['ProductType'] in [DYSON_PURE_COOL,
-                                       DYSON_PURE_COOL_DESKTOP,
-                                       DYSON_PURE_HOT_COOL]:
+                                       DYSON_PURE_COOL_DESKTOP]:
         return True
     return False
 
