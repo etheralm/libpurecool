@@ -1,19 +1,19 @@
-.. Libpurecoollink documentation master file, created by
+.. libpurecool documentation master file, created by
    sphinx-quickstart on Sun Jun 18 08:28:58 2017.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Libpurecoollink's documentation
+libpurecool's documentation
 ===============================
 
-.. image:: https://api.travis-ci.org/CharlesBlonde/libpurecoollink.svg?branch=master
-    :target: https://travis-ci.org/CharlesBlonde/libpurecoollink
+.. image:: https://api.travis-ci.org/CharlesBlonde/libpurecool.svg?branch=master
+    :target: https://travis-ci.org/CharlesBlonde/libpurecool
 
-.. image:: https://coveralls.io/repos/github/CharlesBlonde/libpurecoollink/badge.svg?branch=master
-    :target: https://coveralls.io/github/CharlesBlonde/libpurecoollink?branch=master
+.. image:: https://coveralls.io/repos/github/CharlesBlonde/libpurecool/badge.svg?branch=master
+    :target: https://coveralls.io/github/CharlesBlonde/libpurecool?branch=master
 
-.. image:: https://img.shields.io/pypi/v/libpurecoollink.svg
-    :target: https://pypi.python.org/pypi/libpurecoollink
+.. image:: https://img.shields.io/pypi/v/libpurecool.svg
+    :target: https://pypi.python.org/pypi/libpurecool
 
 This Python 3.4+ library allow you to control `Dyson fan/purifier devices <http://www.dyson.com/air-treatment/purifiers/dyson-pure-hot-cool-link.aspx>`_ and `Dyson 360 Eye robot vacuum device <http://www.dyson.com/vacuum-cleaners/robot/dyson-360-eye.aspx>`_.
 
@@ -87,7 +87,7 @@ Installation
 
 .. code:: shell
 
-    pip install libpurecoollink
+    pip install libpurecool
 
 
 Dyson account
@@ -97,7 +97,7 @@ In order to access the devices, you need to have access to a valid Dyson account
 
 .. code:: python
 
-    from libpurecoollink.dyson import DysonAccount
+    from libpurecool.dyson import DysonAccount
 
     # Log to Dyson account
     # Language is a two characters code (eg: FR)
@@ -119,7 +119,7 @@ Automatic connection (mDNS)
 
 .. code:: python
 
-    from libpurecoollink.dyson import DysonAccount
+    from libpurecool.dyson import DysonAccount
 
     # Log to Dyson account
     # Language is a two characters code (eg: FR)
@@ -143,7 +143,7 @@ Manual connection
 
 .. code:: python
 
-    from libpurecoollink.dyson import DysonAccount
+    from libpurecool.dyson import DysonAccount
 
     # Log to Dyson account
     # Language is a two characters code (eg: FR)
@@ -169,7 +169,7 @@ Disconnection is required for fan/purifier devices in order to release resources
 
 .. code:: python
 
-    from libpurecoollink.dyson import DysonAccount
+    from libpurecool.dyson import DysonAccount
 
     # ... connection do dyson account and to device ... #
 
@@ -183,8 +183,8 @@ After connected to the device, commands cand be send in order to update the devi
 
 .. code:: python
 
-    from libpurecoollink.dyson import DysonAccount
-    from libpurecoollink.const import FanSpeed, FanMode, NightMode, Oscillation, \
+    from libpurecool.dyson import DysonAccount
+    from libpurecool.const import FanSpeed, FanMode, NightMode, Oscillation, \
         FanState, StandbyMonitoring, QualityTarget, ResetFilter, HeatMode, \
         FocusMode, HeatTarget
 
@@ -270,7 +270,7 @@ You can register to any values changed by using a callback function
 .. code:: python
 
     # ... imports ... #
-    from libpurecoollink.dyson_pure_state import DysonPureHotCoolState, \
+    from libpurecool.dyson_pure_state import DysonPureHotCoolState, \
       DysonPureCoolState, DysonEnvironmentalSensorState
 
     # ... connection do dyson account and to device ... #
@@ -303,7 +303,7 @@ Manual connection
 
 .. code:: python
 
-    from libpurecoollink.dyson import DysonAccount
+    from libpurecool.dyson import DysonAccount
 
     # Log to Dyson account
     # Language is a two characters code (eg: FR)
@@ -330,8 +330,8 @@ After connected to the device, commands cand be send in order to update the devi
 .. code:: python
 
     import time
-    from libpurecoollink.dyson import DysonAccount
-    from libpurecoollink.const import PowerMode
+    from libpurecool.dyson import DysonAccount
+    from libpurecool.const import PowerMode
 
     # ... connection do dyson account and to device ... #
 
@@ -386,7 +386,7 @@ You can register to any values changed by using a callback function
 .. code:: python
 
     # ... imports ... #
-    from libpurecoollink.dyson_360_eye import Dyson360EyeState, \
+    from libpurecool.dyson_360_eye import Dyson360EyeState, \
       Dyson360EyeTelemetryData, Dyson360EyeMapData, Dyson360EyeMapGrid, \
       Dyson360EyeMapGlobal
 

@@ -174,7 +174,6 @@ class DysonPureCool(DysonPureCoolLink):
         """Set the fan speed.
 
         :param fan_speed: FanSpeed to set (const.FanSpeed)
-        :return:
         """
         if not isinstance(fan_speed, FanSpeed):
             raise TypeError('fan_speed must be a FanSpeed enumeration')
