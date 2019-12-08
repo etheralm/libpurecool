@@ -92,6 +92,7 @@ class DysonPureHotCool(DysonPureCool):
 
     def __repr__(self):
         """Return a String representation."""
+
         fields = self._fields()
         return 'DysonPureHotCool(' + ",".join(
             printable_fields(fields)) + ')'
