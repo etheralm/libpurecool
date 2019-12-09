@@ -86,6 +86,7 @@ class DysonPureCoolLink(DysonDevice):
             if support_heating(userdata.product_type):
                 device_msg = DysonPureHotCoolState(payload)
             elif support_heating_v2(userdata.product_type):
+                print("State payload: " + str(payload))
                 device_msg = DysonPureHotCoolV2State(payload)
             elif is_pure_cool_v2(userdata.product_type):
                 device_msg = DysonPureCoolV2State(payload)
