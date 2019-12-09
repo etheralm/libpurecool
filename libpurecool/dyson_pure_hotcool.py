@@ -72,24 +72,6 @@ class DysonPureHotCool(DysonPureCool):
 
         self.set_fan_configuration(data)
 
-    def enable_focus_mode(self):
-        """Turn on focus mode."""
-
-        data = {
-            "ffoc": FocusMode.FOCUS_ON
-        }
-
-        self.set_fan_configuration(data)
-
-    def disable_focus_mode(self):
-        """Turn off focus mode."""
-
-        data = {
-            "ffoc": FocusMode.FOCUS_OFF
-        }
-
-        self.set_fan_configuration(data)
-
     def __repr__(self):
         """Return a String representation."""
 

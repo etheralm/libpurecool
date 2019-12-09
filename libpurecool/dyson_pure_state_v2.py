@@ -254,7 +254,6 @@ class DysonPureHotCoolV2State(DysonPureCoolV2State):
         super().__init__(payload)
 
         self._tilt = get_field_value(self._state, 'tilt')
-        self._fan_focus = get_field_value(self._state, 'ffoc')
         self._heat_target = get_field_value(self._state, 'hmax')
         self._heat_mode = get_field_value(self._state, 'hmod')
         self._heat_state = get_field_value(self._state, 'hsta')
@@ -263,11 +262,6 @@ class DysonPureHotCoolV2State(DysonPureCoolV2State):
     def tilt(self):
         """Return tilt status."""
         return self._tilt
-
-    @property
-    def focus_mode(self):
-        """Focus the fan on one stream or spread."""
-        return self._fan_focus
 
     @property
     def heat_target(self):
@@ -302,9 +296,9 @@ class DysonPureHotCoolV2State(DysonPureCoolV2State):
                   ("oscillation_angle_low", self.oscillation_angle_low),
                   ("oscillation_angle_high", self.oscillation_angle_high),
                   ("tilt", self.tilt),
-                  ("focus_mode", self.focus_mode),
                   ("heat_mode", self.heat_mode),
                   ("heat_target", self.heat_target),
                   ("heat_state", self.heat_state)]
 
-        return 'DysonHotCoolState(' + ",".join(printable_fields(fields)) + ')'
+        return 'DysonPureHotCoolV2State(' + \
+               ",".join(printable_fields(fields)) + ')'
