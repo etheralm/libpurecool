@@ -41,7 +41,7 @@ class DysonPureHotCool(DysonPureCool):
         """Turn on head mode."""
 
         data = {
-            "hmod": HeatMode.HEAT_ON
+            "hmod": HeatMode.HEAT_ON.value
         }
 
         self.set_fan_configuration(data)
@@ -50,7 +50,7 @@ class DysonPureHotCool(DysonPureCool):
         """Turn off head mode."""
 
         data = {
-            "hmod": HeatMode.HEAT_OFF
+            "hmod": HeatMode.HEAT_OFF.value
         }
 
         self.set_fan_configuration(data)
