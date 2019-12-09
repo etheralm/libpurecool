@@ -99,7 +99,6 @@ class DysonPureCoolLink(DysonDevice):
         elif DysonEnvironmentalSensorState.is_environmental_state_message(
                 payload):
             if is_pure_cool_v2(userdata.product_type):
-                print("Environment state payload: " + str(payload))
                 device_msg = DysonEnvironmentalSensorV2State(payload)
             else:
                 device_msg = DysonEnvironmentalSensorState(payload)

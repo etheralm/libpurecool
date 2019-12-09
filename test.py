@@ -123,16 +123,6 @@ time.sleep(10)
 print('Disabling heating mode...')
 device.disable_heat_mode()
 
-time.sleep(10)
-
-print('Enabling focus mode...')
-device.enable_focus_mode()
-
-time.sleep(10)
-
-print('Disabling focus mode...')
-device.disable_focus_mode()
-
 print('Done')
 
 exit(0)
