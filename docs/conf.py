@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# Libpurecoollink documentation build configuration file, created by
+# Libpurecool documentation build configuration file, created by
 # sphinx-quickstart on Sun Jun 18 08:28:58 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -50,9 +50,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'Libpurecoollink'
-copyright = '2017, Charles Blonde'
-author = 'Charles Blonde'
+project = 'Libpurecool'
+copyright = '2019, Etheralm'
+author = 'Etheralm'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -114,7 +114,7 @@ html_theme = 'alabaster'
 #html_theme_options = {}
 html_theme_options = {
     'show_powered_by': False,
-    'github_user': 'CharlesBlonde',
+    'github_user': 'etheralm',
     'github_repo': 'libpurecool',
     'github_banner': True,
     'show_related': False
@@ -125,10 +125,10 @@ html_theme_options = {
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = 'Libpurecoollink'
+html_title = 'Libpurecool'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
-html_short_title = 'Libpurecoollink'
+html_short_title = 'Libpurecool'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
@@ -194,7 +194,7 @@ html_show_sourcelink = True
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Libpurecoollinkdoc'
+htmlhelp_basename = 'Libpurecooldoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -214,8 +214,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'Libpurecoollink.tex', 'Libpurecoollink Documentation',
-   'Charles Blonde', 'manual'),
+  ('index', 'Libpurecool.tex', 'Libpurecool Documentation',
+   'Etheralm', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -244,8 +244,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'libpurecool', 'Libpurecoollink Documentation',
-     ['Charles Blonde'], 1)
+    ('index', 'libpurecool', 'Libpurecool Documentation',
+     ['Etheralm'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -258,8 +258,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Libpurecoollink', 'Libpurecoollink Documentation',
-   'Charles Blonde', 'Libpurecoollink', 'One line description of project.',
+  ('index', 'Libpurecool', 'LibpurecoolDocumentation',
+   'Etheralm', 'Libpurecool', 'One line description of project.',
    'Miscellaneous'),
 ]
 

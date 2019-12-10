@@ -2,7 +2,7 @@
 
 import logging
 
-from .const import HeatMode, FocusMode, HeatTarget
+from .const import HeatMode
 from .dyson_pure_cool import DysonPureCool
 from .utils import printable_fields
 
@@ -20,26 +20,21 @@ class DysonPureHotCool(DysonPureCool):
         """
         data = super()._parse_command_args(**kwargs)
 
-        heat_mode = kwargs.get('heat_mode')
         heat_target = kwargs.get('heat_target')
-        focus_mode = kwargs.get('focus_mode')
+        heat_mode = kwargs.get('heat_mode')
 
-        f_heat_mode = heat_mode.value if heat_mode \
-            else self._current_state.heat_mode
         f_heat_target = heat_target if heat_target \
             else self._current_state.heat_target
-        f_fan_focus = focus_mode.value if focus_mode \
-            else self._current_state.focus_mode
+        f_heat_mode = heat_mode.value if heat_mode \
+            else self._current_state.heat_mode
 
-        data["hmod"] = f_heat_mode
-        data["ffoc"] = f_fan_focus
         data["hmax"] = f_heat_target
+        data["hmod"] = f_heat_mode
 
         return data
 
     def enable_heat_mode(self):
         """Turn on head mode."""
-
         data = {
             "hmod": HeatMode.HEAT_ON.value
         }
@@ -48,7 +43,6 @@ class DysonPureHotCool(DysonPureCool):
 
     def disable_heat_mode(self):
         """Turn off head mode."""
-
         data = {
             "hmod": HeatMode.HEAT_OFF.value
         }
@@ -56,7 +50,7 @@ class DysonPureHotCool(DysonPureCool):
         self.set_fan_configuration(data)
 
     def set_heat_target(self, heat_target):
-        """Set temperature target
+        """Set temperature target.
 
         Use either const.HeatTarget.celsius or const.HeatTarget.fahrenheit
         to get a string representation of the target temperature in kelvins.
@@ -65,7 +59,6 @@ class DysonPureHotCool(DysonPureCool):
 
         :param heat_target: target temperature in Kalvin
         """
-
         data = {
             "hmax": heat_target
         }
@@ -74,7 +67,6 @@ class DysonPureHotCool(DysonPureCool):
 
     def __repr__(self):
         """Return a String representation."""
-
         fields = self._fields()
         return 'DysonPureHotCool(' + ",".join(
             printable_fields(fields)) + ')'

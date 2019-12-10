@@ -6,11 +6,11 @@
 libpurecool's documentation
 ===============================
 
-.. image:: https://api.travis-ci.org/CharlesBlonde/libpurecool.svg?branch=master
-    :target: https://travis-ci.org/CharlesBlonde/libpurecool
+.. image:: https://api.travis-ci.org/etheralm/libpurecool.svg?branch=master
+    :target: https://travis-ci.org/etheralm/libpurecool
 
-.. image:: https://coveralls.io/repos/github/CharlesBlonde/libpurecool/badge.svg?branch=master
-    :target: https://coveralls.io/github/CharlesBlonde/libpurecool?branch=master
+.. image:: https://coveralls.io/repos/github/etheralm/libpurecool/badge.svg?branch=master
+    :target: https://coveralls.io/github/etheralm/libpurecool?branch=master
 
 .. image:: https://img.shields.io/pypi/v/libpurecool.svg
     :target: https://pypi.python.org/pypi/libpurecool
@@ -30,7 +30,7 @@ Supported devices
 -  Dyson pure cool tower (TP04)
 -  Dyson pure cool desk (DP04)
 -  Dyson pure cool link devices (Tower and Desk)
--  Dyson Cool+Hot devices
+-  Dyson Cool+Hot devices (HP02 and HP04)
 -  Dyson 360 Eye robot vacuum
 
 Features
@@ -59,7 +59,7 @@ The following commands are supported:
 
   -  Set heat mode
   -  Set heat target
-  -  Set fan focus mode
+  -  Set fan focus mode (HP02)
 
 - 360 Eye device
 

@@ -13,9 +13,11 @@ from queue import Queue, Empty
 import paho.mqtt.client as mqtt
 
 from .dyson_pure_state_v2 import \
-    DysonEnvironmentalSensorV2State, DysonPureCoolV2State, DysonPureHotCoolV2State
+    DysonEnvironmentalSensorV2State, DysonPureCoolV2State, \
+    DysonPureHotCoolV2State
 from .dyson_device import DysonDevice, NetworkDevice, DEFAULT_PORT
-from .utils import printable_fields, support_heating, is_pure_cool_v2, support_heating_v2
+from .utils import printable_fields, support_heating, is_pure_cool_v2, \
+    support_heating_v2
 from .dyson_pure_state import DysonPureHotCoolState, DysonPureCoolState, \
     DysonEnvironmentalSensorState
 from .zeroconf import ServiceBrowser, Zeroconf
@@ -79,7 +81,7 @@ class DysonPureCoolLink(DysonDevice):
 
     @staticmethod
     def on_message(client, userdata, msg):
-        # pylint: disable=unused-argument
+        # pylint: disable=unused-argument, too-many-branches
         """Set function Callback when message received."""
         payload = msg.payload.decode("utf-8")
         if DysonPureCoolState.is_state_message(payload):

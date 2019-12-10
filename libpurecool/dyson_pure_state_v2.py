@@ -259,9 +259,9 @@ class DysonPureHotCoolV2State(DysonPureCoolV2State):
         self._heat_state = get_field_value(self._state, 'hsta')
 
     @property
-    def tilt(self):
-        """Return tilt status."""
-        return self._tilt
+    def heat_state(self):
+        """Return heat state."""
+        return self._heat_state
 
     @property
     def heat_target(self):
@@ -269,14 +269,14 @@ class DysonPureHotCoolV2State(DysonPureCoolV2State):
         return self._heat_target
 
     @property
+    def tilt(self):
+        """Return tilt status."""
+        return self._tilt
+
+    @property
     def heat_mode(self):
         """Heat mode on or off."""
         return self._heat_mode
-
-    @property
-    def heat_state(self):
-        """Return heat state."""
-        return self._heat_state
 
     def __repr__(self):
         """Return a String representation."""

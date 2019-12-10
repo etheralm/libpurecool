@@ -9,6 +9,7 @@ Developer Interface
 .. module:: libpurecool.dyson_pure_cool
 .. module:: libpurecool.dyson_pure_cool_link
 .. module:: libpurecool.dyson_pure_hotcool_link
+.. module:: libpurecool.dyson_pure_hotcool
 .. module:: libpurecool.dyson_pure_state
 .. module:: libpurecool.dyson_pure_state_v2
 

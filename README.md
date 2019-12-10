@@ -4,7 +4,7 @@
 
 This Python 3.4+ library allow you to control [Dyson fan/purifier devices](http://www.dyson.com/air-treatment/purifiers/dyson-pure-hot-cool-link.aspx) and [Dyson 360 Eye robot vacuum device](http://www.dyson.com/vacuum-cleaners/robot/dyson-360-eye.aspx).
 
-[official documentation](http://libpurecoollink.readthedocs.io)
+[official documentation](http://libpurecool.readthedocs.io)
 
 ## Status
 
@@ -12,14 +12,14 @@ This library is becoming quite stable but backward compatibility is not yet guar
 
 ## Full documentation
 
-http://libpurecoollink.readthedocs.io
+http://libpurecool.readthedocs.io
 
 ### Supported devices
 
 * Dyson pure cool tower (TP04)
 * Dyson pure cool desk (DP04)
 * Dyson pure cool link devices (Tower and Desk)
-* Dyson pure cool+hot devices
+* Dyson pure cool+hot devices (HP02 and HP04)
 * Dyson 360 Eye robot vacuum
 
 ## Features
@@ -41,7 +41,7 @@ The following feature are supported:
 * Cool+Hot purifier/fan devices
     * Set heat mode
     * Set heat target
-    * Set fan focus mode
+    * Set fan focus mode (HP02)
 * 360 Eye device (robot vacuum)
     * Set power mode (Quiet/Max)
     * Start cleaning

@@ -1,11 +1,18 @@
-Version 0.4.1
+Version 0.6.0
 ~~~~~~~~~~~~~
 
 :Date:
-    2017/08/05
+    2019/11/19
 
-    - Add new Dyson 360 eye state
-    - Refactor connection (auto_connect() for mDNS, connect() for manual connection)
+    - Add support for the HP04 Pure Hot+Cool fan
+
+Version 0.5.0
+~~~~~~~~~~~~~
+
+:Date:
+    2018/11/19
+
+    - Add support for the new dyson Pure Cool fan (TP04 and DP04)
 
 Version 0.4.1
 ~~~~~~~~~~~~~
