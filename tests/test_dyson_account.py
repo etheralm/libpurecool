@@ -2,6 +2,8 @@ import unittest
 
 from unittest import mock
 
+from libpurecool.dyson_pure_cool import DysonPureCool
+from libpurecool.dyson_pure_hotcool import DysonPureHotCool
 from libpurecool.dyson import DysonAccount, DysonPureCoolLink, \
     DysonPureHotCoolLink, Dyson360Eye, DysonNotLoggedException
 
@@ -111,17 +113,6 @@ def _mocked_list_devices(*args, **kwargs):
                     "ProductType": "438"
                 },
                 {
-                    "Serial": "DB1-US-DBD1231C",
-                    "Name": "device-2",
-                    "Version": "02.05.001.0006",
-                    "LocalCredentials": "1/aJ5t52WvAfn+z+fjDuebkH6aWl2H5Q1vCq"
-                                        "CQSjJfENzMefozxWaDoW1yDluPsi09SGT5nW"
-                                        "MxqxtrfkxnUtRQ==",
-                    "AutoUpdate": True,
-                    "NewVersionAvailable": False,
-                    "ProductType": "438"
-                },
-                {
                     "Serial": "DB1-US-DBD1231D",
                     "Name": "device-3",
                     "Version": "02.05.001.0006",
@@ -131,6 +122,17 @@ def _mocked_list_devices(*args, **kwargs):
                     "AutoUpdate": True,
                     "NewVersionAvailable": False,
                     "ProductType": "520"
+                },
+                {
+                    "Serial": "CB1-US-DBD1231C",
+                    "Name": "device-4",
+                    "Version": "02.05.001.0006",
+                    "LocalCredentials": "1/aJ5t52WvAfn+z+fjDuebkH6aWl2H5Q1vCq"
+                                        "CQSjJfENzMefozxWaDoW1yDluPsi09SGT5nW"
+                                        "MxqxtrfkxnUtRQ==",
+                    "AutoUpdate": True,
+                    "NewVersionAvailable": False,
+                    "ProductType": "527"
                 }
             ]
         )
@@ -174,6 +176,9 @@ class TestDysonAccount(unittest.TestCase):
         self.assertTrue(isinstance(devices[0], DysonPureCoolLink))
         self.assertTrue(isinstance(devices[1], DysonPureHotCoolLink))
         self.assertTrue(isinstance(devices[2], Dyson360Eye))
+        self.assertTrue(isinstance(devices[3], DysonPureCool))
+        self.assertTrue(isinstance(devices[4], DysonPureCool))
+        self.assertTrue(isinstance(devices[5], DysonPureHotCool))
         self.assertTrue(devices[0].active)
         self.assertTrue(devices[0].auto_update)
         self.assertFalse(devices[0].new_version_available)

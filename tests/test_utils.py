@@ -2,7 +2,8 @@ import unittest
 
 from libpurecool.utils import support_heating, is_heating_device, \
     is_360_eye_device, printable_fields, decrypt_password, \
-    is_pure_cool_v2, is_dyson_pure_cool_device, get_field_value
+    is_pure_cool_v2, is_dyson_pure_cool_device, get_field_value, \
+    support_heating_v2, is_heating_device_v2
 
 
 class TestUtils(unittest.TestCase):
@@ -16,9 +17,17 @@ class TestUtils(unittest.TestCase):
         self.assertTrue(support_heating("455"))
         self.assertFalse(support_heating("469"))
 
+    def test_support_heating_v2(self):
+        self.assertTrue(support_heating_v2("527"))
+        self.assertFalse(support_heating_v2("455"))
+
     def test_is_heating_device(self):
         self.assertTrue(is_heating_device({"ProductType": "455"}))
         self.assertFalse(is_heating_device({"ProductType": "469"}))
+
+    def test_is_heating_device_v2(self):
+        self.assertTrue(is_heating_device_v2({"ProductType": "527"}))
+        self.assertFalse(is_heating_device_v2({"ProductType": "455"}))
 
     def test_is_360_eye_device(self):
         self.assertTrue(is_360_eye_device({"ProductType": "N223"}))
