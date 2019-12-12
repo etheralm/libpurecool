@@ -1,5 +1,9 @@
 # Dyson Pure Cool Python library
 
+[![Build Status](https://api.travis-ci.org/etheralm/libpurecool.svg?branch=master)](https://travis-ci.org/etheralm/libpurecool)[![Coverage Status](https://coveralls.io/repos/github/etheralm/libpurecool/badge.svg?branch=master)](https://coveralls.io/github/etheralm/libpurecool?branch=master)[![PyPI](https://img.shields.io/pypi/v/libpurecool.svg)](https://pypi.python.org/pypi/libpurecool) [![Documentation Status](https://readthedocs.org/projects/libpurecool/badge/?version=latest)](http://libpurecool.readthedocs.io/en/latest/?badge=latest)
+
+[official documentation](http://libpurecool.readthedocs.io)
+
 ## Fork of Charles Blonde's libpurecoolink library: [link](https://github.com/CharlesBlonde/libpurecoollink)
 
 This Python 3.4+ library allow you to control [Dyson fan/purifier devices](http://www.dyson.com/air-treatment/purifiers/dyson-pure-hot-cool-link.aspx) and [Dyson 360 Eye robot vacuum device](http://www.dyson.com/vacuum-cleaners/robot/dyson-360-eye.aspx).
