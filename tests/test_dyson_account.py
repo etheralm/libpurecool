@@ -9,6 +9,7 @@ from libpurecool.dyson import DysonAccount, DysonPureCoolLink, \
 
 API_HOST = 'appapi.cp.dyson.com'
 
+
 class MockResponse:
     def __init__(self, json, status_code=200):
         self._json = json
