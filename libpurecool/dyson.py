@@ -21,7 +21,7 @@ from .exceptions import DysonNotLoggedException
 
 _LOGGER = logging.getLogger(__name__)
 
-DYSON_API_URL = "api.cp.dyson.com"
+DYSON_API_URL = "appapi.cp.dyson.com"
 
 
 class DysonAccount:
