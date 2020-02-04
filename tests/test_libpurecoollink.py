@@ -761,6 +761,7 @@ class TestLibPureCoolLink(unittest.TestCase):
 
     def test_heat_target_celsius(self):
         self.assertEqual(HeatTarget.celsius(25), "2980")
+        self.assertEqual(HeatTarget.celsius(25.5), "2985")
 
         with self.assertRaises(DysonInvalidTargetTemperatureException) as ex:
             HeatTarget.celsius(38)
