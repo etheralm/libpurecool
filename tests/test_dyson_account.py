@@ -7,7 +7,7 @@ from libpurecool.dyson_pure_hotcool import DysonPureHotCool
 from libpurecool.dyson import DysonAccount, DysonPureCoolLink, \
     DysonPureHotCoolLink, Dyson360Eye, DysonNotLoggedException
 
-API_HOST='appapi.cp.dyson.com'
+API_HOST = 'appapi.cp.dyson.com'
 
 class MockResponse:
     def __init__(self, json, status_code=200):
