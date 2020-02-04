@@ -122,7 +122,7 @@ class HeatTarget:
         """
         if temperature < 1 or temperature > 37:
             raise DITTE(DITTE.CELSIUS, temperature)
-        return str((int(temperature) + 273) * 10)
+        return str(round((temperature + 273) * 10))
 
     @staticmethod
     def fahrenheit(temperature):
