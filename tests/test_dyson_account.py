@@ -7,6 +7,7 @@ from libpurecool.dyson_pure_hotcool import DysonPureHotCool
 from libpurecool.dyson import DysonAccount, DysonPureCoolLink, \
     DysonPureHotCoolLink, Dyson360Eye, DysonNotLoggedException
 
+API_HOST='appapi.cp.dyson.com'
 
 class MockResponse:
     def __init__(self, json, status_code=200):
@@ -18,7 +19,7 @@ class MockResponse:
 
 
 def _mocked_login_post_failed(*args, **kwargs):
-    url = 'https://{0}{1}?{2}={3}'.format('api.cp.dyson.com',
+    url = 'https://{0}{1}?{2}={3}'.format(API_HOST,
                                           '/v1/userregistration/authenticate',
                                           'country',
                                           'language')
@@ -33,7 +34,7 @@ def _mocked_login_post_failed(*args, **kwargs):
 
 
 def _mocked_login_post(*args, **kwargs):
-    url = 'https://{0}{1}?{2}={3}'.format('api.cp.dyson.com',
+    url = 'https://{0}{1}?{2}={3}'.format(API_HOST,
                                           '/v1/userregistration/authenticate',
                                           'country',
                                           'language')
@@ -48,9 +49,9 @@ def _mocked_login_post(*args, **kwargs):
 
 
 def _mocked_list_devices(*args, **kwargs):
-    url = 'https://{0}{1}'.format('api.cp.dyson.com',
+    url = 'https://{0}{1}'.format(API_HOST,
                                   '/v1/provisioningservice/manifest')
-    url_v2 = 'https://{0}{1}'.format('api.cp.dyson.com',
+    url_v2 = 'https://{0}{1}'.format(API_HOST,
                                      '/v2/provisioningservice/manifest')
 
     if args[0] == url:
