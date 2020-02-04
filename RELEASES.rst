@@ -1,3 +1,12 @@
+Version 0.6.1
+~~~~~~~~~~~~~
+
+:Date:
+    2020/02/04
+
+    - Update dyson API endpoint (jason0x43)
+    - Improve temperature unit conversion (jason0x43)
+
 Version 0.6.0
 ~~~~~~~~~~~~~
 
