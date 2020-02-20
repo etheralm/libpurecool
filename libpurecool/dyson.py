@@ -40,6 +40,10 @@ class DysonAccount:
         self._country = country
         self._logged = False
         self._auth = None
+        if country == "CN":
+            self._dyson_api_url = DYSON_API_URL_CN
+        else:
+            self._dyson_api_url = DYSON_API_URL
 
     def login(self):
         """Login to dyson web services."""
@@ -51,13 +55,12 @@ class DysonAccount:
             "Email": self._email,
             "Password": self._password
         }
-        if self._country == "CN":
-            self.DYSON_API_URL = DYSON_API_URL_CN
-        else:
-            self.DYSON_API_URL = DYSON_API_URL
         login = requests.post(
             "https://{0}/v1/userregistration/authenticate?country={1}".format(
-                self.DYSON_API_URL, self._country), request_body, verify=False)
+                self._dyson_api_url, self._country),
+            request_body,
+            verify=False
+        )
         # pylint: disable=no-member
         if login.status_code == requests.codes.ok:
             json_response = login.json()
@@ -73,10 +76,10 @@ class DysonAccount:
         if self._logged:
             device_response = requests.get(
                 "https://{0}/v1/provisioningservice/manifest".format(
-                    self.DYSON_API_URL), verify=False, auth=self._auth)
+                    self._dyson_api_url), verify=False, auth=self._auth)
             device_v2_response = requests.get(
                 "https://{0}/v2/provisioningservice/manifest".format(
-                    self.DYSON_API_URL), verify=False, auth=self._auth)
+                    self._dyson_api_url), verify=False, auth=self._auth)
             devices = []
             for device in device_response.json():
                 if is_360_eye_device(device):
