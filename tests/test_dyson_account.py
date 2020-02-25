@@ -8,6 +8,7 @@ from libpurecool.dyson import DysonAccount, DysonPureCoolLink, \
     DysonPureHotCoolLink, Dyson360Eye, DysonNotLoggedException
 
 API_HOST = 'appapi.cp.dyson.com'
+API_CN_HOST = 'appapi.cp.dyson.cn'
 
 
 class MockResponse:
@@ -39,6 +40,21 @@ def _mocked_login_post(*args, **kwargs):
                                           '/v1/userregistration/authenticate',
                                           'country',
                                           'language')
+    payload = {'Password': 'password', 'Email': 'email'}
+    if args[0] == url and args[1] == payload:
+        return MockResponse({
+            'Account': 'account',
+            'Password': 'password'
+        })
+    else:
+        raise Exception("Unknown call")
+
+
+def _mocked_login_post_cn(*args, **kwargs):
+    url = 'https://{0}{1}?{2}={3}'.format(API_CN_HOST,
+                                          '/v1/userregistration/authenticate',
+                                          'country',
+                                          'CN')
     payload = {'Password': 'password', 'Email': 'email'}
     if args[0] == url and args[1] == payload:
         return MockResponse({
@@ -150,6 +166,13 @@ class TestDysonAccount(unittest.TestCase):
     @mock.patch('requests.post', side_effect=_mocked_login_post)
     def test_connect_account(self, mocked_login):
         dyson_account = DysonAccount("email", "password", "language")
+        logged = dyson_account.login()
+        self.assertEqual(mocked_login.call_count, 1)
+        self.assertTrue(logged)
+
+    @mock.patch('requests.post', side_effect=_mocked_login_post_cn)
+    def test_connect_account_cn(self, mocked_login):
+        dyson_account = DysonAccount("email", "password", "CN")
         logged = dyson_account.login()
         self.assertEqual(mocked_login.call_count, 1)
         self.assertTrue(logged)

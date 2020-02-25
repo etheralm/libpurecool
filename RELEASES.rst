@@ -1,3 +1,11 @@
+Version 0.6.2
+~~~~~~~~~~~~~
+
+:Date:
+    2020/02/25
+
+    - Add support for chineese accounts (myzhang1029)
+
 Version 0.6.1
 ~~~~~~~~~~~~~
 

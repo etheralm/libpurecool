@@ -15,6 +15,7 @@ PROJECT_CLASSIFIERS = [
     'Intended Audience :: Developers',
     'License :: OSI Approved :: Apache Software License',
     'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.4',
@@ -23,7 +24,7 @@ PROJECT_CLASSIFIERS = [
 
 setup(
     name="libpurecool",
-    version="0.6.1",
+    version="0.6.2",
     license="Apache License 2.0",
     url="http://libpurecool.readthedocs.io",
     download_url="https://github.com/etheralm/libpurecool",
