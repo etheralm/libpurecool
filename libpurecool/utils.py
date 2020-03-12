@@ -4,7 +4,7 @@ import base64
 from Crypto.Cipher import AES
 from .const import DYSON_PURE_HOT_COOL_LINK_TOUR, \
     DYSON_360_EYE, DYSON_PURE_COOL, DYSON_PURE_COOL_DESKTOP, \
-    DYSON_PURE_HOT_COOL
+    DYSON_PURE_HOT_COOL, DYSON_PURE_COOL_HUMIDIFY
 
 
 def support_heating(product_type):
@@ -33,7 +33,7 @@ def is_pure_cool_v2(product_type):
     :param product_type Dyson device model
     """
     if product_type in [DYSON_PURE_COOL, DYSON_PURE_COOL_DESKTOP,
-                        DYSON_PURE_HOT_COOL]:
+                        DYSON_PURE_HOT_COOL, DYSON_PURE_COOL_HUMIDIFY]:
         return True
     return False
 
@@ -91,7 +91,8 @@ def is_360_eye_device(json_payload):
 def is_dyson_pure_cool_device(json_payload):
     """Return true if this json payload is a v2 dyson pure cool device."""
     if json_payload['ProductType'] in [DYSON_PURE_COOL,
-                                       DYSON_PURE_COOL_DESKTOP]:
+                                       DYSON_PURE_COOL_DESKTOP,
+                                       DYSON_PURE_COOL_HUMIDIFY]:
         return True
     return False
 
