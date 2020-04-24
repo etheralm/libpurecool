@@ -84,6 +84,7 @@ class DysonPureCoolLink(DysonDevice):
         # pylint: disable=unused-argument, too-many-branches
         """Set function Callback when message received."""
         payload = msg.payload.decode("utf-8")
+        print(payload)
         if DysonPureCoolState.is_state_message(payload):
             if support_heating(userdata.product_type):
                 device_msg = DysonPureHotCoolState(payload)
