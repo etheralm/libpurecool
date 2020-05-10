@@ -18,21 +18,16 @@ class DysonPureHumidifyCool(DysonPureCool):
         :param kwargs Arguments
         :return payload dictionary
         """
-        print("in dyson DysonPureHumidifyCool _parse_command_args method")
         data = super()._parse_command_args(**kwargs)
-        print("after super call")
 
         humidifier_state = kwargs.get('humidifier_state')
         humidifier_auto = kwargs.get('humidifier_auto')
         humidity_target = kwargs.get('humidity_target')
 
-        print("before f_humidifier_state")
         f_humidifier_state = humidifier_state.value if humidifier_state \
             else self._current_state.humidifier_state
-        print("before f_humidifier_auto")
         f_humidifier_auto = humidifier_auto.value if humidifier_auto \
             else self._current_state.humidifier_auto
-        print("before f_humidity_target")
         f_humidity_target = humidity_target if humidity_target \
             else self._current_state.humidity_target
 

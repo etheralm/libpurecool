@@ -67,7 +67,6 @@ class DysonPureCoolLink(DysonDevice):
 
         :param json_body: JSON message returned by the HTTPS API
         """
-        print("in DysonPureCoolLink")
         super().__init__(json_body)
 
         self._sensor_data_available = Queue()
@@ -91,8 +90,7 @@ class DysonPureCoolLink(DysonDevice):
             elif support_heating_v2(userdata.product_type):
                 device_msg = DysonPureHotCoolV2State(payload)
             elif is_pure_humidifycool_v2(userdata.product_type):
-                device_msg = DysonPureHumidifyCoolV2State(
-                    userdata.product_type)
+                device_msg = DysonPureHumidifyCoolV2State(payload)
             elif is_pure_cool_v2(userdata.product_type):
                 device_msg = DysonPureCoolV2State(payload)
             else:
