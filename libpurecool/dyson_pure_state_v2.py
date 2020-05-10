@@ -302,3 +302,57 @@ class DysonPureHotCoolV2State(DysonPureCoolV2State):
 
         return 'DysonPureHotCoolV2State(' + \
                ",".join(printable_fields(fields)) + ')'
+
+
+class DysonPureHumidifyCoolV2State(DysonPureCoolV2State):
+    """Dyson device state."""
+
+    def __init__(self, payload):
+        """Create a new Dyson Humidify+Cool state.
+
+        :param payload: Message payload
+        """
+        super().__init__(payload)
+
+        self._humidifier_state = get_field_value(self._state, 'hume')
+        self._humidifier_auto = get_field_value(self._state, 'haut')
+        self._humidity_target = get_field_value(self._state, 'humt')
+
+    @property
+    def humidifier_state(self):
+        """Return the state of the humidifier."""
+        return self._humidifier_state
+
+    @property
+    def humidifier_auto(self):
+        """Return the humidifier auto state."""
+        return self._humidifier_auto
+
+    @property
+    def humidity_target(self):
+        """Return the target humidity."""
+        return self._humidity_target
+
+    def __repr__(self):
+        """Return a String representation."""
+        fields = [("fan_power", self.fan_power),
+                  ("front_direction", self.front_direction),
+                  ("auto_mode", self.auto_mode),
+                  ("oscillation_status", self.oscillation_status),
+                  ("oscillation", self.oscillation),
+                  ("night_mode", self.night_mode),
+                  ("continuous_monitoring", self.continuous_monitoring),
+                  ("fan_state", self.fan_state),
+                  ("night_mode_speed", self.night_mode_speed),
+                  ("speed", self.speed),
+                  ("carbon_filter_state", self.carbon_filter_state),
+                  ("hepa_filter_state", self.hepa_filter_state),
+                  ("sleep_timer", self.sleep_timer),
+                  ("oscillation_angle_low", self.oscillation_angle_low),
+                  ("oscillation_angle_high", self.oscillation_angle_high),
+                  ("humidifier_state", self.humidifier_state),
+                  ("humidifier_auto", self.humidifier_auto),
+                  ("humidity_target", self.humidity_target)]
+
+        return 'DysonPureHumidifyCoolV2State(' + \
+               ",".join(printable_fields(fields)) + ')'

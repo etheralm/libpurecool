@@ -33,7 +33,16 @@ def is_pure_cool_v2(product_type):
     :param product_type Dyson device model
     """
     if product_type in [DYSON_PURE_COOL, DYSON_PURE_COOL_DESKTOP,
-                        DYSON_PURE_HOT_COOL, DYSON_PURE_COOL_HUMIDIFY]:
+                        DYSON_PURE_HOT_COOL]:
+        return True
+    return False
+
+def is_pure_humidifycool_v2(product_type):
+    """Return True if it is a v2 dyson pure humidify+cool device.
+
+    :param product_type Dyson device model
+    """
+    if product_type == DYSON_PURE_COOL_HUMIDIFY:
         return True
     return False
 
@@ -91,11 +100,15 @@ def is_360_eye_device(json_payload):
 def is_dyson_pure_cool_device(json_payload):
     """Return true if this json payload is a v2 dyson pure cool device."""
     if json_payload['ProductType'] in [DYSON_PURE_COOL,
-                                       DYSON_PURE_COOL_DESKTOP,
-                                       DYSON_PURE_COOL_HUMIDIFY]:
+                                       DYSON_PURE_COOL_DESKTOP]:
         return True
     return False
 
+def is_dyson_pure_humidifycool_device(json_payload):
+    """Return true if this json payload is a v2 dyson pure humidify+cool device."""
+    if json_payload['ProductType'] == DYSON_PURE_COOL_HUMIDIFY:
+        return True
+    return False
 
 def get_field_value(state, field):
     """Get field value."""

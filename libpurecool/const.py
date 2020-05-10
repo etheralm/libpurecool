@@ -62,6 +62,20 @@ class FanSpeed(Enum):
     FAN_SPEED_AUTO = 'AUTO'
 
 
+class HumidifierState(Enum):
+    """Humidifier State."""
+
+    HUMIDIFIER_OFF = "OFF"
+    HUMIDIFIER_ON = "HUMD"
+
+
+class HumidifierAuto(Enum):
+    """Humidifier State."""
+
+    HUMIDIFIER_AUTO_OFF = "OFF"
+    HUMIDIFIER_AUTO_ON = "ON"
+
+
 class FanState(Enum):
     """Fan State."""
 
