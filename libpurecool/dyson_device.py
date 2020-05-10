@@ -83,6 +83,7 @@ class DysonDevice:
 
         :param json_body: JSON message returned by the HTTPS API
         """
+        print("in DysonDevice init")
         if 'Active' in json_body:
             self._active = json_body['Active']
         else:

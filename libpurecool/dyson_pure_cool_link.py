@@ -67,6 +67,7 @@ class DysonPureCoolLink(DysonDevice):
 
         :param json_body: JSON message returned by the HTTPS API
         """
+        print("in DysonPureCoolLink")
         super().__init__(json_body)
 
         self._sensor_data_available = Queue()
