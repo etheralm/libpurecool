@@ -93,7 +93,8 @@ class DysonAccount:
                 devices.append(dyson_device)
 
             for device_v2 in device_v2_response.json():
-                print("In device for loop: " + device_v2)
+                print("In device for loop: ")
+                print(device_v2)
                 if is_dyson_pure_humidifycool_device(device_v2):
                     print("In is_dyson_pure_humidifycool_device if statement")
                     devices.append(DysonPureHumidifyCool(device_v2))
