@@ -33,7 +33,7 @@ def is_pure_cool_v2(product_type):
     :param product_type Dyson device model
     """
     if product_type in [DYSON_PURE_COOL, DYSON_PURE_COOL_DESKTOP,
-                        DYSON_PURE_HOT_COOL]:
+                        DYSON_PURE_HOT_COOL, DYSON_PURE_COOL_HUMIDIFY]:
         return True
     return False
 
