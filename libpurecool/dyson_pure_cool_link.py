@@ -5,7 +5,6 @@
 import json
 import logging
 import time
-import socket
 from threading import Thread
 from queue import Queue, Empty
 
@@ -20,47 +19,12 @@ from .utils import printable_fields, support_heating, is_pure_cool_v2, \
     support_heating_v2
 from .dyson_pure_state import DysonPureHotCoolState, DysonPureCoolState, \
     DysonEnvironmentalSensorState
-from .zeroconf import ServiceBrowser, Zeroconf
 
 _LOGGER = logging.getLogger(__name__)
 
 
 class DysonPureCoolLink(DysonDevice):
     """Dyson device (fan)."""
-
-    class DysonDeviceListener:
-        """Message listener."""
-
-        def __init__(self, serial, add_device_function):
-            """Create a new message listener.
-
-            :param serial: Device serial
-            :param add_device_function: Callback function
-            """
-            self._serial = serial
-            self.add_device_function = add_device_function
-
-        def remove_service(self, zeroconf, device_type, name):
-            # pylint: disable=unused-argument,no-self-use
-            """Remove listener."""
-            _LOGGER.info("Service %s removed", name)
-
-        def add_service(self, zeroconf, device_type, name):
-            """Add device.
-
-            :param zeroconf: MSDNS object
-            :param device_type: Service type
-            :param name: Device name
-            """
-            device_serial = (name.split(".")[0]).split("_")[1]
-            if device_serial == self._serial:
-                # Find searched device
-                info = zeroconf.get_service_info(device_type, name)
-                address = socket.inet_ntoa(info.address)
-                network_device = NetworkDevice(device_serial, address,
-                                               info.port)
-                self.add_device_function(network_device)
-                zeroconf.close()
 
     def __init__(self, json_body):
         """Create a new Pure Cool Link device.
@@ -119,25 +83,12 @@ class DysonPureCoolLink(DysonDevice):
         :param retry: Max retry
         :return: True if connected, else False
         """
-        for i in range(retry):
-            zeroconf = Zeroconf()
-            listener = self.DysonDeviceListener(self._serial,
-                                                self._add_network_device)
-            ServiceBrowser(zeroconf, "_dyson_mqtt._tcp.local.", listener)
-            try:
-                self._network_device = self._search_device_queue.get(
-                    timeout=timeout)
-            except Empty:
-                # Unable to find device
-                _LOGGER.warning("Unable to find device %s, try %s",
-                                self._serial, i)
-                zeroconf.close()
-            else:
-                break
-        if self._network_device is None:
-            _LOGGER.error("Unable to connect to device %s", self._serial)
-            return False
-        return self._mqtt_connect()
+        return self._auto_connect("_dyson_mqtt._tcp.local.", timeout, retry)
+
+    @staticmethod
+    def _device_serial_from_name(name):
+        """Get device serial from mDNS name."""
+        return (name.split(".")[0]).split("_")[1]
 
     def connect(self, device_ip, device_port=DEFAULT_PORT):
         """Connect to the device using ip address.

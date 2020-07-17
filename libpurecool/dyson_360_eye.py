@@ -17,6 +17,20 @@ _LOGGER = logging.getLogger(__name__)
 class Dyson360Eye(DysonDevice):
     """Dyson 360 Eye device."""
 
+    def auto_connect(self, timeout=5, retry=15):
+        """Try to connect to device using mDNS.
+
+        :param timeout: Timeout
+        :param retry: Max retry
+        :return: True if connected, else False
+        """
+        return self._auto_connect("_360eye_mqtt._tcp.local.", timeout, retry)
+
+    @staticmethod
+    def _device_serial_from_name(name):
+        """Get device serial from mDNS name."""
+        return (name.split(".")[0]).split("-", 1)[1]
+
     def connect(self, device_ip, device_port=DEFAULT_PORT):
         """Try to connect to device.
 
@@ -27,6 +41,10 @@ class Dyson360Eye(DysonDevice):
         self._network_device = NetworkDevice(self._name, device_ip,
                                              device_port)
 
+        return self._mqtt_connect()
+
+    def _mqtt_connect(self):
+        """Connect to the MQTT broker."""
         self._mqtt = mqtt.Client(userdata=self, protocol=3)
         self._mqtt.username_pw_set(self._serial, self._credentials)
         self._mqtt.on_message = self.on_message

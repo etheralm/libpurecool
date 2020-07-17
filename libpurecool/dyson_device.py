@@ -2,14 +2,16 @@
 
 # pylint: disable=too-many-public-methods,too-many-instance-attributes
 
-from queue import Queue
+from queue import Queue, Empty
 import logging
 import json
 import abc
 import time
+import socket
 
 from .utils import printable_fields
 from .utils import decrypt_password
+from .zeroconf import ServiceBrowser, Zeroconf
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -64,6 +66,41 @@ class NetworkDevice:
 class DysonDevice:
     """Abstract Dyson device."""
 
+    class DysonDeviceListener:
+        """Message listener."""
+
+        def __init__(self, serial, add_device_function, serial_from_name):
+            """Create a new message listener.
+
+            :param serial: Device serial
+            :param add_device_function: Callback function
+            """
+            self._serial = serial
+            self.add_device_function = add_device_function
+            self.serial_from_name = serial_from_name
+
+        def remove_service(self, zeroconf, device_type, name):
+            # pylint: disable=unused-argument,no-self-use
+            """Remove listener."""
+            _LOGGER.info("Service %s removed", name)
+
+        def add_service(self, zeroconf, device_type, name):
+            """Add device.
+
+            :param zeroconf: MSDNS object
+            :param device_type: Service type
+            :param name: Device name
+            """
+            device_serial = self.serial_from_name(name)
+            if device_serial == self._serial:
+                # Find searched device
+                info = zeroconf.get_service_info(device_type, name)
+                address = socket.inet_ntoa(info.address)
+                network_device = NetworkDevice(device_serial, address,
+                                               info.port)
+                self.add_device_function(network_device)
+                zeroconf.close()
+
     @staticmethod
     def on_connect(client, userdata, flags, return_code):
         # pylint: disable=unused-argument
@@ -117,6 +154,35 @@ class DysonDevice:
         :param device_port: Device Port (default: 1883)
         :return: True if connected, else False
         """
+        return
+
+    def _auto_connect(self, type_, timeout=5, retry=15):
+        """Try to connect to device using mDNS."""
+        for i in range(retry):
+            zeroconf = Zeroconf()
+            listener = self.DysonDeviceListener(self._serial,
+                                                self._add_network_device,
+                                                self._device_serial_from_name)
+            ServiceBrowser(zeroconf, type_, listener)
+            try:
+                self._network_device = self._search_device_queue.get(
+                    timeout=timeout)
+            except Empty:
+                # Unable to find device
+                _LOGGER.warning("Unable to find device %s, try %s",
+                                self._serial, i)
+                zeroconf.close()
+            else:
+                break
+        if self._network_device is None:
+            _LOGGER.error("Unable to connect to device %s", self._serial)
+            return False
+        return self._mqtt_connect()
+
+    @staticmethod
+    @abc.abstractmethod
+    def _device_serial_from_name(name):
+        """Get device serial from mDNS name."""
         return
 
     @property
