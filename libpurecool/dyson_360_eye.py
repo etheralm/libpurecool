@@ -7,7 +7,7 @@ import datetime
 
 import paho.mqtt.client as mqtt
 
-from .dyson_device import DysonDevice, NetworkDevice, DEFAULT_PORT
+from .dyson_device import DysonDevice
 from .utils import printable_fields
 from .const import PowerMode, Dyson360EyeMode, Dyson360EyeCommand
 
@@ -30,18 +30,6 @@ class Dyson360Eye(DysonDevice):
     def _device_serial_from_name(name):
         """Get device serial from mDNS name."""
         return (name.split(".")[0]).split("-", 1)[1]
-
-    def connect(self, device_ip, device_port=DEFAULT_PORT):
-        """Try to connect to device.
-
-        :param device_ip: Device IP address
-        :param device_port: Device Port (default: 1883)
-        :return: True if connected, else False
-        """
-        self._network_device = NetworkDevice(self._name, device_ip,
-                                             device_port)
-
-        return self._mqtt_connect()
 
     def _mqtt_connect(self):
         """Connect to the MQTT broker."""

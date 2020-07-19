@@ -146,7 +146,6 @@ class DysonDevice:
         """Set function called when device is connected."""
         self._connection_queue.put_nowait(connected)
 
-    @abc.abstractmethod
     def connect(self, device_ip, device_port=DEFAULT_PORT):
         """Connect to the device using ip address.
 
@@ -154,7 +153,10 @@ class DysonDevice:
         :param device_port: Device Port (default: 1883)
         :return: True if connected, else False
         """
-        return
+        self._network_device = NetworkDevice(self._name, device_ip,
+                                             device_port)
+
+        return self._mqtt_connect()
 
     def _auto_connect(self, type_, timeout=5, retry=15):
         """Try to connect to device using mDNS."""
@@ -178,6 +180,11 @@ class DysonDevice:
             _LOGGER.error("Unable to connect to device %s", self._serial)
             return False
         return self._mqtt_connect()
+
+    @abc.abstractmethod
+    def _mqtt_connect(self):
+        """Connect to the MQTT broker."""
+        return
 
     @staticmethod
     @abc.abstractmethod
