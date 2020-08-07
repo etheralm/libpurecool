@@ -40,7 +40,7 @@ class DysonAccount:
         self._country = country
         self._logged = False
         self._auth = None
-        self._headers = {'User-Agent': 'curl/7.64.0'}
+        self._headers = {'User-Agent': 'DysonLink/29019 CFNetwork/1188 Darwin/20.0.0'}
         if country == "CN":
             self._dyson_api_url = DYSON_API_URL_CN
         else:
