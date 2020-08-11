@@ -40,6 +40,7 @@ class DysonAccount:
         self._country = country
         self._logged = False
         self._auth = None
+        self._headers = {'User-Agent': 'DysonLink/29019 CFNetwork/1188 Darwin/20.0.0'}
         if country == "CN":
             self._dyson_api_url = DYSON_API_URL_CN
         else:
@@ -58,7 +59,8 @@ class DysonAccount:
         login = requests.post(
             "https://{0}/v1/userregistration/authenticate?country={1}".format(
                 self._dyson_api_url, self._country),
-            request_body,
+            headers=self._headers,
+            data=request_body,
             verify=False
         )
         # pylint: disable=no-member
@@ -76,10 +78,10 @@ class DysonAccount:
         if self._logged:
             device_response = requests.get(
                 "https://{0}/v1/provisioningservice/manifest".format(
-                    self._dyson_api_url), verify=False, auth=self._auth)
+                    self._dyson_api_url), headers=self._headers, verify=False, auth=self._auth)
             device_v2_response = requests.get(
                 "https://{0}/v2/provisioningservice/manifest".format(
-                    self._dyson_api_url), verify=False, auth=self._auth)
+                    self._dyson_api_url), headers=self._headers, verify=False, auth=self._auth)
             devices = []
             for device in device_response.json():
                 if is_360_eye_device(device):
