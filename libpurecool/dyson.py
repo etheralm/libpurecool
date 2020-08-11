@@ -79,16 +79,16 @@ class DysonAccount:
         if self._logged:
             device_response = requests.get(
                 "https://{0}/v1/provisioningservice/manifest".format(
-                    self._dyson_api_url), 
-                    headers=self._headers, 
-                    verify=False, 
-                    auth=self._auth)
+                    self._dyson_api_url),
+                headers=self._headers,
+                verify=False,
+                auth=self._auth)
             device_v2_response = requests.get(
                 "https://{0}/v2/provisioningservice/manifest".format(
-                    self._dyson_api_url), 
-                    headers=self._headers, 
-                    verify=False, 
-                    auth=self._auth)
+                    self._dyson_api_url),
+                headers=self._headers,
+                verify=False,
+                auth=self._auth)
             devices = []
             for device in device_response.json():
                 if is_360_eye_device(device):

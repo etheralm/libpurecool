@@ -28,7 +28,7 @@ def _mocked_login_post_failed(*args, **kwargs):
                                           'language')
     payload = {'Password': 'password', 'Email': 'email'}
     if args[0] == url and kwargs['data'] == payload and \
-        kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
+            kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
         return MockResponse({
             'Account': 'account',
             'Password': 'password'
@@ -44,7 +44,7 @@ def _mocked_login_post(*args, **kwargs):
                                           'language')
     payload = {'Password': 'password', 'Email': 'email'}
     if args[0] == url and kwargs['data'] == payload and \
-        kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
+            kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
         return MockResponse({
             'Account': 'account',
             'Password': 'password'
@@ -60,7 +60,7 @@ def _mocked_login_post_cn(*args, **kwargs):
                                           'CN')
     payload = {'Password': 'password', 'Email': 'email'}
     if args[0] == url and kwargs['data'] == payload and \
-        kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
+            kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
         return MockResponse({
             'Account': 'account',
             'Password': 'password'
