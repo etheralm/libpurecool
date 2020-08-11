@@ -5,7 +5,8 @@ from unittest import mock
 from libpurecool.dyson_pure_cool import DysonPureCool
 from libpurecool.dyson_pure_hotcool import DysonPureHotCool
 from libpurecool.dyson import DysonAccount, DysonPureCoolLink, \
-    DysonPureHotCoolLink, Dyson360Eye, DysonNotLoggedException
+    DysonPureHotCoolLink, Dyson360Eye, DysonNotLoggedException, \
+    DYSON_API_USER_AGENT
 
 API_HOST = 'appapi.cp.dyson.com'
 API_CN_HOST = 'appapi.cp.dyson.cn'
@@ -26,7 +27,8 @@ def _mocked_login_post_failed(*args, **kwargs):
                                           'country',
                                           'language')
     payload = {'Password': 'password', 'Email': 'email'}
-    if args[0] == url and args[1] == payload:
+    if args[0] == url and kwargs['data'] == payload and \
+        kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
         return MockResponse({
             'Account': 'account',
             'Password': 'password'
@@ -41,7 +43,8 @@ def _mocked_login_post(*args, **kwargs):
                                           'country',
                                           'language')
     payload = {'Password': 'password', 'Email': 'email'}
-    if args[0] == url and args[1] == payload:
+    if args[0] == url and kwargs['data'] == payload and \
+        kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
         return MockResponse({
             'Account': 'account',
             'Password': 'password'
@@ -56,7 +59,8 @@ def _mocked_login_post_cn(*args, **kwargs):
                                           'country',
                                           'CN')
     payload = {'Password': 'password', 'Email': 'email'}
-    if args[0] == url and args[1] == payload:
+    if args[0] == url and kwargs['data'] == payload and \
+        kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
         return MockResponse({
             'Account': 'account',
             'Password': 'password'
