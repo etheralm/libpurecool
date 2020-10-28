@@ -234,7 +234,7 @@ After connected to the device, commands cand be send in order to update the devi
 States and sensors
 ##################
 
-States and sensors values are available using *state* and *environment_state* properties
+States and sensors values are available using *state* and *environmental_state* properties
 
 States values
 
@@ -256,8 +256,8 @@ Environmental values
 
     # ... connection do dyson account and to device ... #
 
-    print(devices[0].environment_state.humidity)
-    print(devices[0].environment_state.sleep_timer)
+    print(devices[0].environmental_state.humidity)
+    print(devices[0].environmental_state.sleep_timer)
     # ... #
 
 All properties are available in the sources.
@@ -285,7 +285,7 @@ You can register to any values changed by using a callback function
             print("DysonEnvironmentalSensorState received")
         print(msg)
 
-    devices[0].connect()
+    devices[0].connect("192.168.1.2")
     devices[0].add_message_listener(on_message)
 
 360 Eye robot vacuum
