@@ -1,3 +1,11 @@
+Version 0.6.3
+~~~~~~~~~~~~~
+
+:Date:
+    2020/08/11
+
+    - Fix missing user agent header in dyson API call (googanhiem)
+
 Version 0.6.2
 ~~~~~~~~~~~~~
 

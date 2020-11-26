@@ -5,3 +5,4 @@ Thanks to all the wonderful folks who have contributed to Libpurecool:
 -  Soraxas <https://github.com/soraxas> Add Cool+Hot devices support
 -  jason0x43 <https://github.com/jason0x43> fixes and updates
 -  myzhang1029 <https://github.com/myzhang1029> support for Chinese accounts
+-  googanhiem <https://github.com/googanhiem> dyson API user agent fix
