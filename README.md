@@ -6,13 +6,15 @@
 
 ## Fork of Charles Blonde's libpurecoolink library: [link](https://github.com/CharlesBlonde/libpurecoollink)
 
-This Python 3.4+ library allow you to control [Dyson fan/purifier devices](http://www.dyson.com/air-treatment/purifiers/dyson-pure-hot-cool-link.aspx) and [Dyson 360 Eye robot vacuum device](http://www.dyson.com/vacuum-cleaners/robot/dyson-360-eye.aspx).
+This Python 3.4+ library allows you to control [Dyson fan/purifier devices](http://www.dyson.com/air-treatment/purifiers/dyson-pure-hot-cool-link.aspx) and [Dyson 360 Eye robot vacuum device](http://www.dyson.com/vacuum-cleaners/robot/dyson-360-eye.aspx).
 
 [official documentation](http://libpurecool.readthedocs.io)
 
 ## Status
 
 This library is becoming quite stable but backward compatibility is not yet guaranteed.
+
+Device firmware is occasionally updated along with the Dyson API, so functionality may be disrupted while we interpret the changes. 
 
 ## Full documentation
 
@@ -64,19 +66,19 @@ The following sensors are available for fan/purifier devices:
 
 Please read [official documentation](http://libpurecoollink.readthedocs.io)
 
-## How it's work
+## How it works
 
 Dyson devices use many different protocols in order to work:
 
-* HTTPS to Dyson API in order to get devices informations (credentials, historical data, etc ...)
+* HTTPS to Dyson API in order to get devices information (credentials, historical data, etc ...)
 * MDNS to discover devices on the local network
 * MQTT (with auth) to get device status and send commands
 
-To my knowledge, no public technical information about API/MQTT are available so all the work is done by testing and a lot of properties are unknown to me at this time.
+To my knowledge, no public technical information about API/MQTT are available so all the work was done by testing and a lot of properties are unknown at this time.
 
-This library come with a modified version of [Zeroconf](https://github.com/jstasiak/python-zeroconf) because Dyson MDNS implementation is not valid.
+This library comes with a modified version of [Zeroconf](https://github.com/jstasiak/python-zeroconf) because the Dyson MDNS implementation is not valid.
 
-This [documentation](https://github.com/shadowwa/Dyson-MQTT2RRD) help me to understand some of return values.
+This [documentation](https://github.com/shadowwa/Dyson-MQTT2RRD) helped me understand some of return values.
 
 ## Work to do
 
