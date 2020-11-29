@@ -24,7 +24,7 @@ PROJECT_CLASSIFIERS = [
 
 setup(
     name="libpurecool",
-    version="0.6.3",
+    version="0.6.4",
     license="Apache License 2.0",
     url="http://libpurecool.readthedocs.io",
     download_url="https://github.com/etheralm/libpurecool",
