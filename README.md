@@ -1,3 +1,5 @@
+This project is looking for a new maintainer. Let me know if you are interested. 
+
 # Dyson Pure Cool Python library
 
 [![Build Status](https://api.travis-ci.org/etheralm/libpurecool.svg?branch=master)](https://travis-ci.org/etheralm/libpurecool) [![Coverage Status](https://coveralls.io/repos/github/etheralm/libpurecool/badge.svg?branch=master)](https://coveralls.io/github/etheralm/libpurecool?branch=master) [![PyPI](https://img.shields.io/pypi/v/libpurecool.svg)](https://pypi.python.org/pypi/libpurecool) [![Documentation Status](https://readthedocs.org/projects/libpurecool/badge/?version=latest)](http://libpurecool.readthedocs.io/en/latest/?badge=latest)
