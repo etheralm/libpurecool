@@ -16,3 +16,4 @@ main/
 docs/_build
 README.rst
 .vscode
+venv/
