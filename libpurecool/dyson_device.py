@@ -184,19 +184,16 @@ class DysonDevice:
     @abc.abstractmethod
     def _mqtt_connect(self):
         """Connect to the MQTT broker."""
-        return
 
     @staticmethod
     @abc.abstractmethod
     def _device_serial_from_name(name):
         """Get device serial from mDNS name."""
-        return
 
     @property
     @abc.abstractmethod
     def status_topic(self):
         """MQTT status topic."""
-        return
 
     @property
     def command_topic(self):
