@@ -103,6 +103,10 @@ def on_add_device(network_device):
     pass
 
 
+def device_serial_from_name(name):
+    return (name.split(".")[0]).split("_")[1]
+
+
 class TestLibPureCoolLink(unittest.TestCase):
     def setUp(self):
         pass
@@ -236,8 +240,11 @@ class TestLibPureCoolLink(unittest.TestCase):
 
     @mock.patch('socket.inet_ntoa', )
     def test_device_dyson_listener(self, mocked_ntoa):
-        listener = DysonPureCoolLink.DysonDeviceListener('serial-1',
-                                                         on_add_device)
+        listener = DysonPureCoolLink.DysonDeviceListener(
+            'serial-1',
+            on_add_device,
+            device_serial_from_name
+        )
         zeroconf = Mock()
         listener.remove_service(zeroconf, "ptype", "serial-1")
         info = Mock()
