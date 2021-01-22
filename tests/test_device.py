@@ -1,16 +1,15 @@
 from libpurecool.dyson_360_eye import Dyson360Eye
-from paho.mqtt.client import Client
 import pytest
 import socket
 from libpurecool.zeroconf import ServiceInfo, Zeroconf
 from unittest import mock
 from unittest.mock import MagicMock
-import paho.mqtt.client as mqtt
 
 from libpurecool.dyson_pure_cool_link import DysonPureCoolLink
 
 IP_ADDRESS = "192.168.1.2"
 SERIAL = "XXX-XX-XXXXXXXX"
+
 
 def _mocked_zeroconf():
     def _get_service_info(*args):
@@ -23,9 +22,10 @@ def _mocked_zeroconf():
     zeroconf.get_service_info = MagicMock(side_effect=_get_service_info)
     return zeroconf
 
+
 def _get_mocked_service_browser(serial):
     def _mocked_service_browser(zeroconf, type, listener):
-        listener.add_service(zeroconf, type, f"{serial}.{type}")
+        listener.add_service(zeroconf, type, "{}.{}".format(serial, type))
     return _mocked_service_browser
 
 
