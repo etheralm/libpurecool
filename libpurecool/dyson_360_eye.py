@@ -113,9 +113,9 @@ class Dyson360Eye(DysonDevice):
         device_msg = None
         if Dyson360EyeState.is_state_message(payload):
             device_msg = Dyson360EyeState(payload)
+            userdata.state = device_msg
             if not userdata.device_available:
                 userdata.state_data_available()
-            userdata.state = device_msg
         elif Dyson360EyeMapGlobal.is_map_global(payload):
             device_msg = Dyson360EyeMapGlobal(payload)
         elif Dyson360EyeTelemetryData.is_telemetry_data(payload):
