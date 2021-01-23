@@ -93,9 +93,9 @@ class DysonPureCoolLink(DysonDevice):
                 device_msg = DysonPureCoolV2State(payload)
             else:
                 device_msg = DysonPureCoolState(payload)
+            userdata.state = device_msg
             if not userdata.device_available:
                 userdata.state_data_available()
-            userdata.state = device_msg
             for function in userdata.callback_message:
                 function(device_msg)
         elif DysonEnvironmentalSensorState.is_environmental_state_message(
@@ -104,9 +104,9 @@ class DysonPureCoolLink(DysonDevice):
                 device_msg = DysonEnvironmentalSensorV2State(payload)
             else:
                 device_msg = DysonEnvironmentalSensorState(payload)
+            userdata.environmental_state = device_msg
             if not userdata.device_available:
                 userdata.sensor_data_available()
-            userdata.environmental_state = device_msg
             for function in userdata.callback_message:
                 function(device_msg)
         else:
