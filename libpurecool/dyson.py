@@ -54,7 +54,7 @@ class DysonAccount:
                       "dyson are using a self signed certificate.")
         
         #Must first check account status
-        accountstatus = requests.get(f"https://{self._dyson_api_url}/v1/userregistration/userstatus?country={self._country}&email={self._email}")
+        accountstatus = requests.get(f"https://{self._dyson_api_url}/v1/userregistration/userstatus?country={self._country}&email={self._email}", verify=False)
         if accountstatus.status_code == requests.codes.ok:
             json_status = accountstatus.json()
             if json_status['accountStatus'] != "ACTIVE":
