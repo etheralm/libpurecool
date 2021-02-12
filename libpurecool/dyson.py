@@ -41,7 +41,10 @@ class DysonAccount:
         self._country = country
         self._logged = False
         self._auth = None
-        self._headers = {'User-Agent': DYSON_API_USER_AGENT, 'Content-Type': 'application/json'}
+        self._headers = {
+            'User-Agent': DYSON_API_USER_AGENT,
+            'Content-Type': 'application/json'
+        }
         if country == "CN":
             self._dyson_api_url = DYSON_API_URL_CN
         else:
@@ -52,13 +55,17 @@ class DysonAccount:
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         _LOGGER.debug("Disabling insecure request warnings since "
                       "dyson are using a self signed certificate.")
-        
-        #Must first check account status
-        accountstatus = requests.get(f"https://{self._dyson_api_url}/v1/userregistration/userstatus?country={self._country}&email={self._email}", headers=self._headers, verify=False)
+        # Must first check account status
+        accountstatus = requests.get(
+            "https://{0}/v1/userregistration/userstatus?country={1}&email={2}".format(
+                self._dyson_api_url, self._country, self._email),
+            headers=self._headers,
+            verify=False)
+        # pylint: disable=no-member
         if accountstatus.status_code == requests.codes.ok:
             json_status = accountstatus.json()
             if json_status['accountStatus'] != "ACTIVE":
-                #The account is not active
+                # The account is not active
                 self._logged = False
                 return self._logged
         else:
