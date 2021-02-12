@@ -41,7 +41,7 @@ class DysonAccount:
         self._country = country
         self._logged = False
         self._auth = None
-        self._headers = {'User-Agent': DYSON_API_USER_AGENT}
+        self._headers = {'User-Agent': DYSON_API_USER_AGENT, 'Content-Type': 'application/json'}
         if country == "CN":
             self._dyson_api_url = DYSON_API_URL_CN
         else:
@@ -54,7 +54,7 @@ class DysonAccount:
                       "dyson are using a self signed certificate.")
         
         #Must first check account status
-        accountstatus = requests.get(f"https://{self._dyson_api_url}/v1/userregistration/userstatus?country={self._country}&email={self._email}", verify=False)
+        accountstatus = requests.get(f"https://{self._dyson_api_url}/v1/userregistration/userstatus?country={self._country}&email={self._email}", headers=self._headers, verify=False)
         if accountstatus.status_code == requests.codes.ok:
             json_status = accountstatus.json()
             if json_status['accountStatus'] != "ACTIVE":
@@ -73,7 +73,7 @@ class DysonAccount:
             "https://{0}/v1/userregistration/authenticate?country={1}".format(
                 self._dyson_api_url, self._country),
             headers=self._headers,
-            data=request_body,
+            json=request_body,
             verify=False
         )
         # pylint: disable=no-member
