@@ -54,7 +54,9 @@ class DysonAccount:
                       "dyson are using a self signed certificate.")
         # Must first check account status
         accountstatus = requests.get(
-            "https://{0}/v1/userregistration/userstatus".format(self._dyson_api_url),
+            "https://{0}/v1/userregistration/userstatus".format(
+                self._dyson_api_url
+            ),
             params={"country": self._country, "email": self._email},
             headers=self._headers,
             verify=False,
