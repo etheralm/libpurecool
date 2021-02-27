@@ -36,6 +36,44 @@ def _mocked_login_post_failed(*args, **kwargs):
     else:
         raise Exception("Unknown call")
 
+def _mock_gets(*args, **kwargs):
+    if "provisioningservice" in args[0]:
+        return _mocked_list_devices(*args, **kwargs)
+    else:
+        return _mocked_status_get(*args, **kwargs)
+
+def _mocked_status_get(*args, **kwargs):
+    url = 'https://{0}{1}'.format(API_HOST,
+                                          '/v1/userregistration/userstatus')
+    params = {"country": "language", "email": "email"}
+    if args[0] == url and kwargs['params'] == params:
+        return MockResponse({
+            'accountStatus': 'ACTIVE'
+        })
+    else:
+        raise Exception("Unknown call")
+
+def _mocked_status_get_cn(*args, **kwargs):
+    url = 'https://{0}{1}'.format(API_CN_HOST,
+                                          '/v1/userregistration/userstatus')
+    params = {"country": "CN", "email": "email"}
+    if args[0] == url and kwargs['params'] == params:
+        return MockResponse({
+            'accountStatus': 'ACTIVE'
+        })
+    else:
+        raise Exception("Unknown call")
+
+def _mocked_status_get_failed(*args, **kwargs):
+    url = 'https://{0}{1}'.format(API_HOST,
+                                          '/v1/userregistration/userstatus')
+    params = {"country": "language", "email": "email"}
+    if args[0] == url and kwargs['params'] == params:
+        return MockResponse({
+            'accountStatus': 'INACTIVE'
+        })
+    else:
+        raise Exception("Unknown call")
 
 def _mocked_login_post(*args, **kwargs):
     url = 'https://{0}{1}?{2}={3}'.format(API_HOST,
@@ -43,7 +81,7 @@ def _mocked_login_post(*args, **kwargs):
                                           'country',
                                           'language')
     payload = {'Password': 'password', 'Email': 'email'}
-    if args[0] == url and kwargs['data'] == payload and \
+    if args[0] == url and kwargs['json'] == payload and \
             kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
         return MockResponse({
             'Account': 'account',
@@ -59,7 +97,7 @@ def _mocked_login_post_cn(*args, **kwargs):
                                           'country',
                                           'CN')
     payload = {'Password': 'password', 'Email': 'email'}
-    if args[0] == url and kwargs['data'] == payload and \
+    if args[0] == url and kwargs['json'] == payload and \
             kwargs['headers'] == {'User-Agent': DYSON_API_USER_AGENT}:
         return MockResponse({
             'Account': 'account',
@@ -167,32 +205,38 @@ class TestDysonAccount(unittest.TestCase):
     def tearDown(self):
         pass
 
+    @mock.patch('requests.get', side_effect=_mock_gets)
     @mock.patch('requests.post', side_effect=_mocked_login_post)
-    def test_connect_account(self, mocked_login):
+    def test_connect_account(self, mocked_login, mocked_status):
         dyson_account = DysonAccount("email", "password", "language")
         logged = dyson_account.login()
+        self.assertEqual(mocked_status.call_count, 1)
         self.assertEqual(mocked_login.call_count, 1)
         self.assertTrue(logged)
 
+    @mock.patch('requests.get', side_effect=_mocked_status_get_cn)
     @mock.patch('requests.post', side_effect=_mocked_login_post_cn)
-    def test_connect_account_cn(self, mocked_login):
+    def test_connect_account_cn(self, mocked_login, mocked_status):
         dyson_account = DysonAccount("email", "password", "CN")
         logged = dyson_account.login()
+        self.assertEqual(mocked_status.call_count, 1)
         self.assertEqual(mocked_login.call_count, 1)
         self.assertTrue(logged)
 
+    @mock.patch('requests.get', side_effect=_mocked_status_get_failed)
     @mock.patch('requests.post', side_effect=_mocked_login_post_failed)
-    def test_connect_account_failed(self, mocked_login):
+    def test_connect_account_failed(self, mocked_login, mocked_status):
         dyson_account = DysonAccount("email", "password", "language")
         logged = dyson_account.login()
-        self.assertEqual(mocked_login.call_count, 1)
+        self.assertEqual(mocked_status.call_count, 1)
+        self.assertEqual(mocked_login.call_count, 0)
         self.assertFalse(logged)
 
     def test_not_logged(self):
         dyson_account = DysonAccount("email", "password", "language")
         self.assertRaises(DysonNotLoggedException, dyson_account.devices)
 
-    @mock.patch('requests.get', side_effect=_mocked_list_devices)
+    @mock.patch('requests.get', side_effect=_mock_gets)
     @mock.patch('requests.post', side_effect=_mocked_login_post)
     def test_list_devices(self, mocked_login, mocked_list_devices):
         dyson_account = DysonAccount("email", "password", "language")
@@ -200,7 +244,7 @@ class TestDysonAccount(unittest.TestCase):
         self.assertEqual(mocked_login.call_count, 1)
         self.assertTrue(dyson_account.logged)
         devices = dyson_account.devices()
-        self.assertEqual(mocked_list_devices.call_count, 2)
+        self.assertEqual(mocked_list_devices.call_count, 3)
         self.assertEqual(len(devices), 6)
         self.assertTrue(isinstance(devices[0], DysonPureCoolLink))
         self.assertTrue(isinstance(devices[1], DysonPureHotCoolLink))
