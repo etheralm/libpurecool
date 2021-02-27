@@ -52,6 +52,25 @@ class DysonAccount:
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         _LOGGER.debug("Disabling insecure request warnings since "
                       "dyson are using a self signed certificate.")
+        # Must first check account status
+        accountstatus = requests.get(
+            "https://{0}/v1/userregistration/userstatus".format(
+                self._dyson_api_url
+            ),
+            params={"country": self._country, "email": self._email},
+            headers=self._headers,
+            verify=False,
+        )
+        # pylint: disable=no-member
+        if accountstatus.status_code == requests.codes.ok:
+            json_status = accountstatus.json()
+            if json_status['accountStatus'] != "ACTIVE":
+                # The account is not active
+                self._logged = False
+                return self._logged
+        else:
+            self._logged = False
+            return self._logged
 
         request_body = {
             "Email": self._email,
@@ -61,7 +80,7 @@ class DysonAccount:
             "https://{0}/v1/userregistration/authenticate?country={1}".format(
                 self._dyson_api_url, self._country),
             headers=self._headers,
-            data=request_body,
+            json=request_body,
             verify=False
         )
         # pylint: disable=no-member
